@@ -21,7 +21,8 @@ const Map = () => {
             newMap.on('load', async () => {
                 setMap(newMap);
 
-                // Fetch GeoJSON data
+                // Fetch GeoJSON data for Affordable Housing Projects
+                // NEXT: will pass in whether affordable or rent stabilized, once the data for the latter is ready
                 const response = await fetch('https://data.cityofnewyork.us/resource/hg8x-zxpr.json');
                 let data = await response.json();
                 // Filter out the "confidential" projects that are appearing at [0,0]
