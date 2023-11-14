@@ -163,11 +163,8 @@ const Map = () => {
 
     }, [map]);
 
-    return (<div>
-                    <div id="search-js"></div>
-
-        <div ref={mapContainer} style={{ width: '100%', height: '500px' }} />
-        </div>
+    return (
+        <div ref={mapContainer} style={{ width: '100%', height: '100%' }} />
         );
 };
 
