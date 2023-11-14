@@ -17,7 +17,7 @@ const Map = () => {
                 zoom: 10
             });
             // Add navigation control (the +/- zoom buttons)
-            newMap.addControl(new mapboxgl.NavigationControl(), 'top-right')
+            newMap.addControl(new mapboxgl.NavigationControl(), 'bottom-left')
 
             newMap.on('load', async () => {
                 setMap(newMap);
