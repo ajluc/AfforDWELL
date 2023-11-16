@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 // import { MapboxSearchBox } from '@mapbox/search-js-web';
 
-const Map = ({ visiblePins, setVisiblePins }) => {
+const Map = ({ setVisiblePins, handlePinClick }) => {
     const mapContainer = useRef(null);
     const [map, setMap] = useState(null);
 
@@ -112,15 +112,17 @@ const Map = ({ visiblePins, setVisiblePins }) => {
                     });
                 });
 
-                // When an individual marker is clicked, show a popup
+                // When an individual marker is clicked, open building details modal
                 newMap.on('click', 'unclustered-point', (e) => {
-                    const coordinates = e.features[0].geometry.coordinates.slice();
-                    const description = JSON.stringify(e.features[0].properties, null, 2);
+                    handlePinClick(e.features[0].properties)
+                    // Old functionality: brings up a pop up beneath the clicked pin
+                    // const coordinates = e.features[0].geometry.coordinates.slice();
+                    // const description = JSON.stringify(e.features[0].properties, null, 2);
 
-                    new mapboxgl.Popup()
-                        .setLngLat(coordinates)
-                        .setHTML(`${coordinates}${description}</pre>`)
-                        .addTo(newMap);
+                    // new mapboxgl.Popup()
+                    //     .setLngLat(coordinates)
+                    //     .setHTML(`${coordinates}${description}</pre>`)
+                    //     .addTo(newMap);
                 });
 
                 // Add search bar

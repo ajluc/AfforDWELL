@@ -4,7 +4,7 @@ import Map from './Map';
 import { ArrowLeft } from 'react-bootstrap-icons';
 import { Container, Col, Row } from 'react-bootstrap';
 
-const MapContainer = ({ toggleWidth, visiblePins, setVisiblePins }) => {
+const MapContainer = ({ toggleWidth, visiblePins, setVisiblePins, handlePinClick }) => {
     const [isArrowFlipped, setIsArrowFlipped] = useState(false);
 
     const handleArrowClick = () => {
@@ -30,7 +30,7 @@ const MapContainer = ({ toggleWidth, visiblePins, setVisiblePins }) => {
                 </Container>
             </Button>
             <div style={{ width: '100%', height: '100vh'}}>
-                <Map visiblePins={visiblePins} setVisiblePins={setVisiblePins} />
+                <Map visiblePins={visiblePins} setVisiblePins={setVisiblePins} handlePinClick={handlePinClick} />
             </div>
 
         </div>

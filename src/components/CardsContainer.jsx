@@ -2,7 +2,7 @@ import { useState } from "react"
 import BuildingCard from "./BuildingCard"
 import Pagination from 'react-bootstrap/Pagination'
 
-const CardsContainer = ({ isVisible, visiblePins }) => {
+const CardsContainer = ({ isVisible, visiblePins, handlePinClick }) => {
     const [currentPage, setCurrentPage] = useState(1)
     const itemsPerPage = 8
 
@@ -67,7 +67,7 @@ const CardsContainer = ({ isVisible, visiblePins }) => {
         <div style={{ width: isVisible ? '100%' : '0%', transition: 'width 0.3s' }}>
             {isVisible && (
                 currentItems.map(pin => 
-                    <BuildingCard pin={pin}/>
+                    <BuildingCard key={pin.building_id} pin={pin} handlePinClick={handlePinClick}/>
                 )
             )}
             <Pagination>
