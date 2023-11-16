@@ -26,6 +26,8 @@ const Map = ({ setVisiblePins, handlePinClick }) => {
                 // NEXT: will pass in whether affordable or rent stabilized, once the data for the latter is ready
                 const response = await fetch('https://data.cityofnewyork.us/resource/hg8x-zxpr.json');
                 let data = await response.json();
+                // On load, set state to show all cards
+                setVisiblePins(data)
                 // Filter out the "confidential" projects that are appearing at [0,0]
                 // Future question: what are these projects? Will need to look through the OpenData documentation or contact the city.
                 data = data.filter(item => item.latitude);

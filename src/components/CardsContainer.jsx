@@ -17,14 +17,14 @@ const CardsContainer = ({ isVisible, visiblePins, handlePinClick }) => {
 
     return (
         <div style={{ width: isVisible ? '100%' : '0%', transition: 'width 0.3s' }}>
-            <Container>
-                {isVisible && (
-                    currentItems.map(pin => 
+            {isVisible && (
+                <Container>
+                    {currentItems.map(pin => 
                         <BuildingCard key={pin.building_id} pin={pin} handlePinClick={handlePinClick}/>
-                    )
-                )}
-                <MyPagination pageCount={pageCount} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
-            </Container>
+                    )}
+                    <MyPagination pageCount={pageCount} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
+                </Container>
+            )}
         </div>
     );
 };
