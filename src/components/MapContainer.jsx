@@ -2,7 +2,6 @@ import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Map from './Map';
 import { ArrowLeft } from 'react-bootstrap-icons';
-import { Container, Col, Row } from 'react-bootstrap';
 import Stack from 'react-bootstrap/Stack'
 
 const MapContainer = ({ toggleWidth, visiblePins, setVisiblePins, handlePinClick }) => {
