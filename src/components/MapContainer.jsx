@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Map from './Map';
 import { ArrowLeft } from 'react-bootstrap-icons';
 import { Container, Col, Row } from 'react-bootstrap';
+import Stack from 'react-bootstrap/Stack'
 
 const MapContainer = ({ toggleWidth, visiblePins, setVisiblePins, handlePinClick }) => {
     const [isArrowFlipped, setIsArrowFlipped] = useState(false);
@@ -18,16 +19,10 @@ const MapContainer = ({ toggleWidth, visiblePins, setVisiblePins, handlePinClick
                 style={{ position: 'absolute', top: 10, right: 10, zIndex: 1000}}
                 onClick={handleArrowClick}
                 >
-                <Container>
-                    <Row>
-                        <Col>
-                            {isArrowFlipped ? <p>Hide List</p> : <p>Show List</p>}
-                        </Col>
-                        <Col>
-                            <ArrowLeft style={{transform: isArrowFlipped ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.6s' }}/>
-                        </Col>
-                    </Row>
-                </Container>
+                <Stack direction='horizontal'>
+                    {isArrowFlipped ? <p style={{marginBottom: "0px", marginRight: "10px"}}>Hide List</p> : <p style={{marginBottom: "0px", marginRight: "10px"}}>Show List</p>}
+                    <ArrowLeft style={{transform: isArrowFlipped ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.6s' }}/>
+                </Stack>
             </Button>
             <div style={{ width: '100%', height: '100vh'}}>
                 <Map visiblePins={visiblePins} setVisiblePins={setVisiblePins} handlePinClick={handlePinClick} />

@@ -8,7 +8,7 @@ const NavBar = () => {
     return (
         <Navbar variant='light' expand='lg'>
             <Container>
-                <Navbar.Brand>AfforDWELL</Navbar.Brand>
+                <Navbar.Brand href="/">AfforDWELL</Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <ButtonGroup aria-label="Housing type toggles">
@@ -17,7 +17,7 @@ const NavBar = () => {
                         <Button variant="outline-primary">All</Button>
                     </ButtonGroup>
                     <Nav>
-                        <Nav.Link href="about">About</Nav.Link>
+                        <Nav.Link href="/about">About</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Container>
