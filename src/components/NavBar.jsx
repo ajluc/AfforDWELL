@@ -17,8 +17,7 @@ const NavBar = () => {
                         <Button variant="outline-primary">All</Button>
                     </ButtonGroup>
                     <Nav>
-                        <Nav.Link href="#about">About</Nav.Link>
-                        <Nav.Link href="#login">Log In</Nav.Link>
+                        <Nav.Link href="about">About</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Container>
