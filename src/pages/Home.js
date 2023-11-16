@@ -1,5 +1,5 @@
 // import Map from "../components/Map"
-import React, { useState } from 'react';
+import { useState } from 'react';
 import CardsContainer from '../components/CardsContainer';
 import MapContainer from "../components/MapContainer"
 import Container from 'react-bootstrap/Container';
@@ -12,7 +12,6 @@ const Home = () => {
     };
 
     const [visiblePins, setVisiblePins] = useState([])
-    console.log(visiblePins)
 
     return (
         <Container fluid style={{ display: 'flex' }}>

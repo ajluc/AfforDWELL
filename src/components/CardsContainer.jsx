@@ -1,5 +1,3 @@
-import React from 'react';
-
 const CardsContainer = ({ isVisible }) => {
     return (
         <div style={{ width: isVisible ? '100%' : '0%', transition: 'width 0.3s' }}>

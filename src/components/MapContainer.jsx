@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Map from './Map';
 import { ArrowLeft } from 'react-bootstrap-icons';

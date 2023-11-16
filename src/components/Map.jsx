@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
-import { MapboxSearchBox } from '@mapbox/search-js-web';
+// import { MapboxSearchBox } from '@mapbox/search-js-web';
 
 const Map = ({ visiblePins, setVisiblePins }) => {
     const mapContainer = useRef(null);
