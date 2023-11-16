@@ -11,10 +11,13 @@ const Home = () => {
         setIsFullWidth(!isFullWidth);
     };
 
+    const [visiblePins, setVisiblePins] = useState([])
+    console.log(visiblePins)
+
     return (
         <Container fluid style={{ display: 'flex' }}>
-            <MapContainer toggleWidth={toggleWidth} style={{ width: isFullWidth ? '100%' : '50%' }} />
-            <CardsContainer isVisible={!isFullWidth} />
+            <MapContainer toggleWidth={toggleWidth} visiblePins={visiblePins} setVisiblePins={setVisiblePins} style={{ width: isFullWidth ? '100%' : '50%' }} />
+            <CardsContainer isVisible={!isFullWidth} visiblePins={visiblePins}/>
         </Container>
     )
 }

@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import { MapboxSearchBox } from '@mapbox/search-js-web';
 
-const Map = () => {
+const Map = ({ visiblePins, setVisiblePins }) => {
     const mapContainer = useRef(null);
     const [map, setMap] = useState(null);
 
@@ -136,6 +136,16 @@ const Map = () => {
                 //     searchBox.mapboxgl = mapboxgl;
                 //     newMap.addControl(searchBox);
                 // };
+
+                // Event listener to track changes in the map's bounds/viewport
+                newMap.on('moveend', () => {
+                    const bounds = newMap.getBounds();
+                    console.log(bounds)
+                    // Filter data points using these bounds to find visible data elements
+                    const visibleData = data.filter(item => bounds.contains([item.longitude, item.latitude]));
+                    setVisiblePins(visibleData)
+                });
+                
 
                 // Change the cursor to a pointer when hovering over clusters and individual markers
                 newMap.on('mouseenter', 'clusters', () => {
