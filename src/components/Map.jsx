@@ -140,7 +140,6 @@ const Map = ({ visiblePins, setVisiblePins }) => {
                 // Event listener to track changes in the map's bounds/viewport
                 newMap.on('moveend', () => {
                     const bounds = newMap.getBounds();
-                    console.log(bounds)
                     // Filter data points using these bounds to find visible data elements
                     const visibleData = data.filter(item => bounds.contains([item.longitude, item.latitude]));
                     setVisiblePins(visibleData)
