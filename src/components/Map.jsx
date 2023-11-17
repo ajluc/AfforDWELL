@@ -3,9 +3,10 @@ import mapboxgl from 'mapbox-gl';
 // import { MapboxSearchBox } from '@mapbox/search-js-web';
 import dataStabilized from "../temporaryData/testData.json"
 
-const Map = ({ setVisiblePins, handlePinClick }) => {
+const Map = ({ setVisiblePins, handlePinClick, toggleValue }) => {
     const mapContainer = useRef(null);
     const [map, setMap] = useState(null);
+    const [dataAffordable, setAffordable] = useState(null)
 
     // Function to add a data sourceId to the map, make clusters and individual markers, and add click/mouse functionality for the clusters and markers.
     const handleClusters = (sourceId, sourceData, newMap, color) => {
@@ -116,6 +117,7 @@ const Map = ({ setVisiblePins, handlePinClick }) => {
 
     
     useEffect(() => {
+        console.log('in use effect', toggleValue)
         mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_API_TOKEN;
 
         const initializeMap = () => {
@@ -130,6 +132,7 @@ const Map = ({ setVisiblePins, handlePinClick }) => {
             newMap.addControl(new mapboxgl.NavigationControl(), 'bottom-left')
             
             newMap.on('load', async () => {
+                console.log('entered on load', toggleValue)
                 setMap(newMap);
 
                 // Fetch JSON data for Affordable Housing Projects
@@ -140,13 +143,12 @@ const Map = ({ setVisiblePins, handlePinClick }) => {
                 data = data.filter(item => item.latitude);
                 // On load, set state to show all cards
                 setVisiblePins(data)
+                setAffordable(data)
 
                 // Fetch JSON data for Rent Stabilized Buildings (currently, temporary example data is imported)
                 console.log(dataStabilized)
+                handleClusters('stabilized', dataStabilized, newMap, '#f9d74a')
 
-                // run the handle function to put data on the map for both stabilized and affordable units
-                handleClusters('affordable', data, newMap, '#51bbd6')
-                handleClusters('stabilized', dataStabilized, newMap, '#ffeb96')
                 
                 // Add search bar
                 // const searchJS = document.getElementById('search-js');
@@ -178,6 +180,22 @@ const Map = ({ setVisiblePins, handlePinClick }) => {
         }
 
     }, [map]);
+
+    useEffect (() => {
+        if(!map) return
+
+        // run the handle function to put data on the map for both stabilized and affordable units
+        // need functionality to remove layers for each
+        if (toggleValue !== 1) {
+            console.log("hi", toggleValue)
+            handleClusters('affordable', dataAffordable, map, '#51bbd6')
+        }
+        if (toggleValue !== 2) {
+            console.log("hi", toggleValue)
+            handleClusters('stabilized', dataStabilized, map, '#f9d74a')
+        }
+
+    }, [toggleValue])
 
     return (
         <div ref={mapContainer} style={{ width: '100%', height: '100%' }} />
