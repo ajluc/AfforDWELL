@@ -197,8 +197,7 @@ const Map = ({ setVisiblePins, handlePinClick, toggleValue }) => {
             }
         }
 
-        // run the handle function to put data on the map for both stabilized and affordable units
-        // need functionality to remove layers for each
+        // run the handle function to put data on the map for both stabilized and affordable units, depending on toggle state
         if (toggleValue === 1) {
             if (!map.getLayer('stabilized')) {
                 handleClusters('stabilized', dataStabilized, map, '#f9d74a')
