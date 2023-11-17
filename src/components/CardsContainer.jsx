@@ -4,9 +4,8 @@ import BuildingCard from "./BuildingCard"
 import Container from "react-bootstrap/Container";
 import MyPagination from "./MyPagination";
 
-const CardsContainer = ({ isVisible, visiblePins, handlePinClick }) => {
+const CardsContainer = ({ isVisible, visiblePins, handlePinClick, currentPage, setCurrentPage }) => {
     // State for pagination
-    const [currentPage, setCurrentPage] = useState(1)
     const itemsPerPage = 8
 
     // Calculate page count and current item index

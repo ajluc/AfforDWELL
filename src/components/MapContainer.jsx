@@ -6,7 +6,7 @@ import Stack from 'react-bootstrap/Stack'
 import ToggleButton from 'react-bootstrap/ToggleButton';
 import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup'
 
-const MapContainer = ({ toggleWidth, visiblePins, setVisiblePins, handlePinClick }) => {
+const MapContainer = ({ toggleWidth, visiblePins, setVisiblePins, handlePinClick, setCurrentPage }) => {
     const [isArrowFlipped, setIsArrowFlipped] = useState(false);
 
     const handleArrowClick = () => {
@@ -17,6 +17,7 @@ const MapContainer = ({ toggleWidth, visiblePins, setVisiblePins, handlePinClick
     const [toggleValue, setToggleValue] = useState(1)
     const handleToggleClick = (val) => {
         setToggleValue(val)
+        setCurrentPage(1)
     }
 
     return (

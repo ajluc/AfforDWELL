@@ -23,6 +23,8 @@ const Home = () => {
         setShowPinDetails(true)
     }
 
+    const [currentPage, setCurrentPage] = useState(1)
+
     return (
         <Container fluid style={{ display: 'flex' }}>
             <MapContainer
@@ -30,11 +32,14 @@ const Home = () => {
                 setVisiblePins={setVisiblePins}
                 handlePinClick={handlePinClick}
                 style={{ width: isFullWidth ? '100%' : '50%' }} 
+                setCurrentPage={setCurrentPage}
             />
             <CardsContainer
                 isVisible={!isFullWidth}
                 visiblePins={visiblePins}
                 handlePinClick={handlePinClick}
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
             />
             <BuildingModal
                 selectedPin={selectedPin}
