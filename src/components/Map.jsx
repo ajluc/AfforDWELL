@@ -184,17 +184,47 @@ const Map = ({ setVisiblePins, handlePinClick, toggleValue }) => {
     useEffect (() => {
         if(!map) return
 
-        // run the handle function to put data on the map for both stabilized and affordable units
-        // need functionality to remove layers for each
-        if (toggleValue !== 1) {
-            console.log("hi", toggleValue)
-            handleClusters('affordable', dataAffordable, map, '#51bbd6')
-        }
-        if (toggleValue !== 2) {
-            console.log("hi", toggleValue)
-            handleClusters('stabilized', dataStabilized, map, '#f9d74a')
+        // Function to remove a layer and its source
+        const removeLayerAndSource = (map, layerId) => {
+            if (map.getLayer(layerId)) {
+                // If the layer exists, remove it
+                map.removeLayer(layerId);
+            }
+        
+            if (map.getSource(layerId)) {
+                // If the source exists, remove it
+                map.removeSource(layerId);
+            }
         }
 
+        // run the handle function to put data on the map for both stabilized and affordable units
+        // need functionality to remove layers for each
+        if (toggleValue === 1) {
+            if (!map.getLayer('stabilized')) {
+                handleClusters('stabilized', dataStabilized, map, '#f9d74a')
+            }
+            if (map.getLayer('affordable')) {
+                removeLayerAndSource(map, 'affordable-cluster-count');
+                removeLayerAndSource(map, 'affordable-unclustered-point');
+                removeLayerAndSource(map, 'affordable');
+            }
+        }
+        if (toggleValue === 2) {
+            if (!map.getLayer('affordable')) {
+                handleClusters('affordable', dataAffordable, map, '#51bbd6')
+            }
+            if (map.getLayer('stabilized')) {
+                removeLayerAndSource(map, 'stabilized-cluster-count');
+                removeLayerAndSource(map, 'stabilized-unclustered-point');
+                removeLayerAndSource(map, 'stabilized');
+            }
+        }
+        if (toggleValue === 3) {
+            if (!map.getLayer('stabilized')) {
+                handleClusters('stabilized', dataStabilized, map, '#f9d74a')
+            }
+        }
+        
     }, [toggleValue])
 
     return (
