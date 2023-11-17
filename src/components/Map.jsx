@@ -1,12 +1,16 @@
 import { useEffect, useRef, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 // import { MapboxSearchBox } from '@mapbox/search-js-web';
-import dataStabilized from "../temporaryData/testData.json"
+import dataTempStabilized from "../temporaryData/testData.json"
 
 const Map = ({ setVisiblePins, handlePinClick, toggleValue }) => {
     const mapContainer = useRef(null);
     const [map, setMap] = useState(null);
     const [dataAffordable, setAffordable] = useState(null)
+    const [dataStabilized, setStabilized] = useState(dataTempStabilized)
+    const [visibleAffordable, setVisibleAffordable] = useState([])
+    const [visibleStabilized, setVisibleStabilized] = useState([])
+    const [visibleCombined, setVisibleCombined] = useState([])
 
     // Function to add a data sourceId to the map, make clusters and individual markers, and add click/mouse functionality for the clusters and markers.
     const handleClusters = (sourceId, sourceData, newMap, color) => {
@@ -117,7 +121,6 @@ const Map = ({ setVisiblePins, handlePinClick, toggleValue }) => {
 
     
     useEffect(() => {
-        console.log('in use effect', toggleValue)
         mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_API_TOKEN;
 
         const initializeMap = () => {
@@ -132,7 +135,6 @@ const Map = ({ setVisiblePins, handlePinClick, toggleValue }) => {
             newMap.addControl(new mapboxgl.NavigationControl(), 'bottom-left')
             
             newMap.on('load', async () => {
-                console.log('entered on load', toggleValue)
                 setMap(newMap);
 
                 // Fetch JSON data for Affordable Housing Projects
@@ -141,13 +143,16 @@ const Map = ({ setVisiblePins, handlePinClick, toggleValue }) => {
                 // Filter out the "confidential" projects that are appearing at [0,0]
                 // Future question: what are these projects? Will need to look through the OpenData documentation or contact the city.
                 data = data.filter(item => item.latitude);
-                // On load, set state to show all cards
-                setVisiblePins(data)
                 setAffordable(data)
+                setVisibleAffordable(data)
 
-                // Fetch JSON data for Rent Stabilized Buildings (currently, temporary example data is imported)
-                console.log(dataStabilized)
+                // Initial map and card state:
+                // Fetch JSON data for Rent Stabilized Buildings (currently, temporary example data is imported) and load on map
                 handleClusters('stabilized', dataStabilized, newMap, '#f9d74a')
+                // On load, set state to show all stabilized building cards
+                setVisibleStabilized(dataStabilized)
+                setVisiblePins(visibleStabilized)
+                setVisibleCombined([...data, ...dataStabilized])
 
                 
                 // Add search bar
@@ -169,8 +174,13 @@ const Map = ({ setVisiblePins, handlePinClick, toggleValue }) => {
                 newMap.on('moveend', () => {
                     const bounds = newMap.getBounds();
                     // Filter data points using these bounds to find visible data elements
-                    const visibleData = data.filter(item => bounds.contains([item.longitude, item.latitude]));
-                    setVisiblePins(visibleData)
+                    const visibleDataAffordable = data.filter(item => bounds.contains([item.longitude, item.latitude]));
+                    const visibleDataStabilized = dataStabilized.filter(item => bounds.contains([item.longitude, item.latitude]));
+                    // Store visible data points in state slices
+                    // This doesn't seem efficient to save all three, but I'm having issues with toggleValue not registering correctly so it's the solution for now
+                    setVisibleStabilized(visibleDataStabilized)
+                    setVisibleAffordable(visibleDataAffordable)
+                    setVisibleCombined([...visibleDataAffordable, ...visibleDataStabilized])
                 });
             });
         };
@@ -179,7 +189,7 @@ const Map = ({ setVisiblePins, handlePinClick, toggleValue }) => {
             initializeMap();
         }
 
-    }, [map]);
+    }, [map, toggleValue]);
 
     useEffect (() => {
         if(!map) return
@@ -199,6 +209,8 @@ const Map = ({ setVisiblePins, handlePinClick, toggleValue }) => {
 
         // run the handle function to put data on the map for both stabilized and affordable units, depending on toggle state
         if (toggleValue === 1) {
+            console.log(visibleStabilized)
+            setVisiblePins(visibleStabilized)
             if (!map.getLayer('stabilized')) {
                 handleClusters('stabilized', dataStabilized, map, '#f9d74a')
             }
@@ -209,6 +221,8 @@ const Map = ({ setVisiblePins, handlePinClick, toggleValue }) => {
             }
         }
         if (toggleValue === 2) {
+            console.log(visibleAffordable)
+            setVisiblePins(visibleAffordable)
             if (!map.getLayer('affordable')) {
                 handleClusters('affordable', dataAffordable, map, '#51bbd6')
             }
@@ -219,12 +233,16 @@ const Map = ({ setVisiblePins, handlePinClick, toggleValue }) => {
             }
         }
         if (toggleValue === 3) {
+            setVisiblePins(visibleCombined)
             if (!map.getLayer('stabilized')) {
                 handleClusters('stabilized', dataStabilized, map, '#f9d74a')
             }
+            if (!map.getLayer('affordable')) {
+                handleClusters('affordable', dataAffordable, map, '#51bbd6')
+            }
         }
         
-    }, [toggleValue])
+    }, [toggleValue, visibleAffordable, visibleStabilized])
 
     return (
         <div ref={mapContainer} style={{ width: '100%', height: '100%' }} />
