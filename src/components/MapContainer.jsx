@@ -48,7 +48,7 @@ const MapContainer = ({ toggleWidth, visiblePins, setVisiblePins, handlePinClick
                     <ArrowLeft style={{transform: isArrowFlipped ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.6s' }}/>
                 </Stack>
             </Button>
-            <div style={{ width: '100%', height: '100vh'}}>
+            <div style={{ width: '100%', height: 'calc(100vh - 3.5rem)'}}>
                 <Map visiblePins={visiblePins} setVisiblePins={setVisiblePins} handlePinClick={handlePinClick} toggleValue={toggleValue}/>
             </div>
 

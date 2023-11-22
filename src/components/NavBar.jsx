@@ -12,11 +12,11 @@ const NavBar = () => {
     //     console.log(val)
     // }
     return (
-        <Navbar variant='light' expand='lg'>
+        <Navbar bg="light" expand='lg' sticky="top" style={{ height: '3.5rem'}}>
             <Container>
                 <Navbar.Brand href="/">AfforDWELL</Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-                <Navbar.Collapse id="responsive-navbar-nav">
+                <Navbar.Collapse id="responsive-navbar-nav" className="justify-content-end">
                     {/* <ToggleButtonGroup type="radio" name="options" defaultValue={1} onChange={handleClick}>
                         <ToggleButton id="tbg-radio-1" value={1}>
                         Rent Stabilized
@@ -29,6 +29,7 @@ const NavBar = () => {
                         </ToggleButton>
                     </ToggleButtonGroup> */}
                     <Nav>
+                        <Nav.Link href="/">Home</Nav.Link>
                         <Nav.Link href="/about">About</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
