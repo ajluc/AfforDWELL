@@ -14,7 +14,7 @@ const MapContainer = ({ toggleWidth, visiblePins, setVisiblePins, handlePinClick
         toggleWidth();
     };
 
-    const [toggleValue, setToggleValue] = useState(1)
+    const [toggleValue, setToggleValue] = useState(3)
     const handleToggleClick = (val) => {
         setToggleValue(val)
         setCurrentPage(1)
@@ -25,7 +25,7 @@ const MapContainer = ({ toggleWidth, visiblePins, setVisiblePins, handlePinClick
             <ToggleButtonGroup
                 type="radio" 
                 name="options" 
-                defaultValue={1} 
+                defaultValue={3} 
                 onChange={handleToggleClick} 
                 style={{ position: 'absolute', top: 10, left: 10, zIndex: 1000}}
             >
