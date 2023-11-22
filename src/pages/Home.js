@@ -27,29 +27,25 @@ const Home = () => {
 
     return (
         <div style={{ display: 'flex'}}>
-
-            {/* <Container fluid style={{ display: 'flex', margin: '0px', padding: '0px', height: '100%'}}> */}
-                <MapContainer
-                    toggleWidth={toggleWidth}
-                    setVisiblePins={setVisiblePins}
-                    handlePinClick={handlePinClick}
-                    style={{ width: isFullWidth ? '100%' : '50%' }} 
-                    setCurrentPage={setCurrentPage}
-                />
-                <CardsContainer
-                    isVisible={!isFullWidth}
-                    visiblePins={visiblePins}
-                    handlePinClick={handlePinClick}
-                    currentPage={currentPage}
-                    setCurrentPage={setCurrentPage}
-                    style={{ overflow: 'auto' }}
-                />
-                <BuildingModal
-                    selectedPin={selectedPin}
-                    showPinDetails={showPinDetails}
-                    setShowPinDetails={setShowPinDetails}
-                />
-            {/* </Container> */}
+            <MapContainer
+                toggleWidth={toggleWidth}
+                setVisiblePins={setVisiblePins}
+                handlePinClick={handlePinClick}
+                style={{ width: isFullWidth ? '100%' : '50%' }} 
+                setCurrentPage={setCurrentPage}
+            />
+            <CardsContainer
+                isVisible={!isFullWidth}
+                visiblePins={visiblePins}
+                handlePinClick={handlePinClick}
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+            />
+            <BuildingModal
+                selectedPin={selectedPin}
+                showPinDetails={showPinDetails}
+                setShowPinDetails={setShowPinDetails}
+            />
         </div>
     )
 }

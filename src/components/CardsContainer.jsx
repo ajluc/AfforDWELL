@@ -15,7 +15,7 @@ const CardsContainer = ({ isVisible, visiblePins, handlePinClick, currentPage, s
     const pageCount = Math.ceil(visiblePins.length / itemsPerPage)
 
     return (
-        <div style={{ width: isVisible ? '100%' : '0%', transition: 'width 0.3s' }}>
+        <div style={{ width: isVisible ? '100%' : '0%', transition: 'width 0.3s', height: 'calc(100vh - 3.5rem)', overflow: 'auto' }}>
             {isVisible && (
                 <Container>
                     {currentItems.map(pin => 
