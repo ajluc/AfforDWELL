@@ -5,7 +5,7 @@ const BuildingCard = ({pin, handlePinClick}) => {
     const CardType = () => {
         if (pin.project_id) {
             return (
-                <Card onClick={()=> handlePinClick(pin)}>
+                <Card onClick={()=> handlePinClick(pin)} >
                     <Card.Header>Affordable Housing</Card.Header>
                     <Card.Body>
                         <Card.Title>{pin.project_name}</Card.Title>

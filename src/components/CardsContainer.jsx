@@ -15,13 +15,17 @@ const CardsContainer = ({ isVisible, visiblePins, handlePinClick, currentPage, s
     const pageCount = Math.ceil(visiblePins.length / itemsPerPage)
 
     return (
-        <div style={{ width: isVisible ? '100%' : '0%', transition: 'width 0.3s', height: 'calc(100vh - 3.5rem)', overflow: 'auto' }}>
+        <div style={{ width: isVisible ? '100%' : '0%', transition: 'width 0.3s', height: 'calc(100vh - 3.5rem)', overflow: 'auto', position: 'relative' }}>
             {isVisible && (
                 <Container>
                     {currentItems.map(pin => 
-                        <BuildingCard key={pin.building_id} pin={pin} handlePinClick={handlePinClick}/>
+                        <div style={{ paddingBottom: '10px'}}>
+                            <BuildingCard key={pin.building_id} pin={pin} handlePinClick={handlePinClick} />
+                        </div>
                     )}
-                    <MyPagination pageCount={pageCount} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
+                    {(pageCount > 1) && (
+                        <MyPagination pageCount={pageCount} currentPage={currentPage} setCurrentPage={setCurrentPage} />
+                    )}
                 </Container>
             )}
         </div>

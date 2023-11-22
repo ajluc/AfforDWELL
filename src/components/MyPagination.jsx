@@ -57,7 +57,7 @@ const MyPagination = ({pageCount, currentPage, setCurrentPage}) => {
     };
 
     return (
-        <Pagination>
+        <Pagination className='justify-content-center'>
             <Pagination.First onClick={() => setCurrentPage(1)} disabled={currentPage === 1} />
             <Pagination.Prev onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1} />
             {renderPaginationItems()}
