@@ -138,7 +138,7 @@ const Map = ({ setVisiblePins, handlePinClick, toggleValue }) => {
                 setMap(newMap);
 
                 // Fetch JSON data for Affordable Housing Projects
-                const response = await fetch('https://data.cityofnewyork.us/resource/hg8x-zxpr.json');
+                const response = await fetch('https://ajluc.github.io/hack-o-ween/markers3.geojson');
                 let data = await response.json();
                 // Filter out the "confidential" projects that are appearing at [0,0]
                 // Future question: what are these projects? Will need to look through the OpenData documentation or contact the city.
