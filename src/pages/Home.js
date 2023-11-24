@@ -27,7 +27,7 @@ const Home = () => {
 
     return (
         <div style={{ display: 'flex'}}>
-            {/* <MapContainer
+            <MapContainer
                 toggleWidth={toggleWidth}
                 setVisiblePins={setVisiblePins}
                 handlePinClick={handlePinClick}
@@ -45,7 +45,7 @@ const Home = () => {
                 selectedPin={selectedPin}
                 showPinDetails={showPinDetails}
                 setShowPinDetails={setShowPinDetails}
-            /> */}
+            />
         </div>
     )
 }
