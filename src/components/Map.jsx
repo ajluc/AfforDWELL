@@ -126,7 +126,7 @@ const Map = ({ setVisiblePins, handlePinClick, toggleValue }) => {
         const initializeMap = () => {
             const newMap = new mapboxgl.Map({
                 container: mapContainer.current,
-                style: 'mapbox://styles/ajluc/clbfex7b9001l14qp20sva3qo/draft',
+                style: 'mapbox://styles/mapbox/streets-v11',
                 center: [-74.006, 40.7128], // New York City coordinates
                 zoom: 10
             });
@@ -138,7 +138,7 @@ const Map = ({ setVisiblePins, handlePinClick, toggleValue }) => {
                 setMap(newMap);
 
                 // Fetch JSON data for Affordable Housing Projects
-                const response = await fetch('https://ajluc.github.io/hack-o-ween/markers3.geojson');
+                const response = await fetch('https://data.cityofnewyork.us/resource/hg8x-zxpr.json');
                 let data = await response.json();
                 // Filter out the "confidential" projects that are appearing at [0,0]
                 // Future question: what are these projects? Will need to look through the OpenData documentation or contact the city.
