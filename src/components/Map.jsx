@@ -189,7 +189,7 @@ const Map = ({ setVisiblePins, handlePinClick, toggleValue }) => {
             initializeMap();
         }
 
-    }, [map, toggleValue]);
+    }, [map]);
 
     useEffect (() => {
         if(!map) return
@@ -209,7 +209,6 @@ const Map = ({ setVisiblePins, handlePinClick, toggleValue }) => {
 
         // run the handle function to put data on the map for both stabilized and affordable units, depending on toggle state
         if (toggleValue === 1) {
-            console.log(visibleStabilized)
             setVisiblePins(visibleStabilized)
             if (!map.getLayer('stabilized')) {
                 handleClusters('stabilized', dataStabilized, map, '#f9d74a')
@@ -221,7 +220,6 @@ const Map = ({ setVisiblePins, handlePinClick, toggleValue }) => {
             }
         }
         if (toggleValue === 2) {
-            console.log(visibleAffordable)
             setVisiblePins(visibleAffordable)
             if (!map.getLayer('affordable')) {
                 handleClusters('affordable', dataAffordable, map, '#51bbd6')
