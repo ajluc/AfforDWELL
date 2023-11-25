@@ -126,7 +126,7 @@ const Map = ({ setVisiblePins, handlePinClick, toggleValue }) => {
         const initializeMap = () => {
             const newMap = new mapboxgl.Map({
                 container: mapContainer.current,
-                style: 'mapbox://styles/mapbox/streets-v11',
+                style: 'mapbox://styles/ajluc/clpekjkig006y01pggisrfnjl',
                 center: [-74.006, 40.7128], // New York City coordinates
                 zoom: 10
             });
