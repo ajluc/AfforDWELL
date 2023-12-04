@@ -4,6 +4,7 @@ import CardsContainer from '../components/CardsContainer';
 import MapContainer from "../components/MapContainer"
 import Container from 'react-bootstrap/Container';
 import BuildingModal from '../components/BuildingModal';
+import MapFilters from '../components/MapFilters';
 
 const Home = () => {
     // State and toggle for opening and closing the cards container panel
@@ -11,6 +12,10 @@ const Home = () => {
     const toggleWidth = () => {
         setIsFullWidth(!isFullWidth);
     };
+
+    // State for toggling between Data Mode and Available Listings Mode
+    const [availableModeToggle, setAvailableModeToggle] = useState(false)
+
 
     // State for which pins are visible in the current map bounds
     const [visiblePins, setVisiblePins] = useState([])
@@ -26,6 +31,10 @@ const Home = () => {
     const [currentPage, setCurrentPage] = useState(1)
 
     return (
+    <div>
+        <MapFilters 
+            availableModeToggle={availableModeToggle}
+            setAvailableModeToggle={setAvailableModeToggle}/>
         <div style={{ display: 'flex'}}>
             <MapContainer
                 toggleWidth={toggleWidth}
@@ -33,6 +42,7 @@ const Home = () => {
                 handlePinClick={handlePinClick}
                 style={{ width: isFullWidth ? '100%' : '50%' }} 
                 setCurrentPage={setCurrentPage}
+                availableModeToggle={availableModeToggle}
             />
             <CardsContainer
                 isVisible={!isFullWidth}
@@ -47,6 +57,7 @@ const Home = () => {
                 setShowPinDetails={setShowPinDetails}
             />
         </div>
+    </div>
     )
 }
 

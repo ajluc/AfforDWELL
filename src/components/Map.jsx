@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 // import { MapboxSearchBox } from '@mapbox/search-js-web';
-import dataTempStabilized from "../temporaryData/testData.json"
+import dataTempStabilized from "../temporaryData/testDataStatenIsland.json"
+import mockDataStabilized from "../temporaryData/mockDataStabilized.json"
 
-const Map = ({ setVisiblePins, handlePinClick, toggleValue }) => {
+const Map = ({ setVisiblePins, handlePinClick, toggleValue, availableModeToggle }) => {
     const mapContainer = useRef(null);
     const [map, setMap] = useState(null);
     const [dataAffordable, setAffordable] = useState(null)
@@ -207,40 +208,67 @@ const Map = ({ setVisiblePins, handlePinClick, toggleValue }) => {
             }
         }
 
-        // run the handle function to put data on the map for both stabilized and affordable units, depending on toggle state
-        if (toggleValue === 1) {
-            setVisiblePins(visibleStabilized)
-            if (!map.getLayer('stabilized')) {
-                handleClusters('stabilized', dataStabilized, map, '#f9d74a')
-            }
+        // Display only available listings
+        if (availableModeToggle) {
             if (map.getLayer('affordable')) {
                 removeLayerAndSource(map, 'affordable-cluster-count');
                 removeLayerAndSource(map, 'affordable-unclustered-point');
                 removeLayerAndSource(map, 'affordable');
-            }
-        }
-        if (toggleValue === 2) {
-            setVisiblePins(visibleAffordable)
-            if (!map.getLayer('affordable')) {
-                handleClusters('affordable', dataAffordable, map, '#51bbd6')
             }
             if (map.getLayer('stabilized')) {
                 removeLayerAndSource(map, 'stabilized-cluster-count');
                 removeLayerAndSource(map, 'stabilized-unclustered-point');
                 removeLayerAndSource(map, 'stabilized');
             }
-        }
-        if (toggleValue === 3) {
-            setVisiblePins(visibleCombined)
-            if (!map.getLayer('stabilized')) {
-                handleClusters('stabilized', dataStabilized, map, '#f9d74a')
+            if (!map.getLayer('affordable-listings')) {
+                handleClusters('affordable-listings', mockDataStabilized, map, '#f9d74a')
             }
-            if (!map.getLayer('affordable')) {
-                handleClusters('affordable', dataAffordable, map, '#51bbd6')
+        } 
+        //  Display all buildings (Data Mode)
+        else {
+            // Clean up listings layer to avoid doubling up on map markers. Note: currently, these points may not already be displayed on the map since data processing is in progress.
+            if (map.getLayer('affordable-listings')) {
+                removeLayerAndSource(map, 'affordable-listings-cluster-count');
+                removeLayerAndSource(map, 'affordable-listings-unclustered-point');
+                removeLayerAndSource(map, 'affordable-listings');
             }
+
+            // run the handle function to put data on the map for both stabilized and affordable units, depending on toggle state
+            if (toggleValue === 1) {
+                setVisiblePins(visibleStabilized)
+                if (!map.getLayer('stabilized')) {
+                    handleClusters('stabilized', dataStabilized, map, '#f9d74a')
+                }
+                if (map.getLayer('affordable')) {
+                    removeLayerAndSource(map, 'affordable-cluster-count');
+                    removeLayerAndSource(map, 'affordable-unclustered-point');
+                    removeLayerAndSource(map, 'affordable');
+                }
+            }
+            if (toggleValue === 2) {
+                setVisiblePins(visibleAffordable)
+                if (!map.getLayer('affordable')) {
+                    handleClusters('affordable', dataAffordable, map, '#51bbd6')
+                }
+                if (map.getLayer('stabilized')) {
+                    removeLayerAndSource(map, 'stabilized-cluster-count');
+                    removeLayerAndSource(map, 'stabilized-unclustered-point');
+                    removeLayerAndSource(map, 'stabilized');
+                }
+            }
+            if (toggleValue === 3) {
+                setVisiblePins(visibleCombined)
+                if (!map.getLayer('stabilized')) {
+                    handleClusters('stabilized', dataStabilized, map, '#f9d74a')
+                }
+                if (!map.getLayer('affordable')) {
+                    handleClusters('affordable', dataAffordable, map, '#51bbd6')
+                }
+            }
+
         }
         
-    }, [toggleValue, visibleAffordable, visibleStabilized])
+    }, [toggleValue, visibleAffordable, visibleStabilized, availableModeToggle])
 
     return (
         <div ref={mapContainer} style={{ width: '100%', height: '100%' }} />

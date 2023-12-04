@@ -1,0 +1,19 @@
+[
+    {
+        "address": "88 Adelphi St",
+        "unit": "#3",
+        "city": "Brooklyn",
+        "posting": {
+            "platform": "StreetEasy",
+            "link": "https://streeteasy.com/building/88-adelphi-street-brooklyn/3"
+        },
+        "beds": 1,
+        "baths": 1,
+        "price": 2450,
+        "images": [
+            "https://photos.zillowstatic.com/fp/c95ee06024e26a32d0d2e75db962090c-se_large_800_400.webp"
+        ],
+        "latitude": 40.69505,
+        "longitude": -73.97224
+    }
+]
