@@ -8,6 +8,29 @@ const BuildingModal = ({selectedPin, showPinDetails, setShowPinDetails}) => {
         setShowPinDetails(false)
     }
 
+    // Calculate days remaining for lottery closing
+    function daysUntil(isoDate) {
+        const currentDate = new Date();
+        const targetDate = new Date(isoDate);
+    
+        const differenceInTime = targetDate.getTime() - currentDate.getTime();
+        const differenceInDays = Math.ceil(differenceInTime / (1000 * 3600 * 24));
+    
+        return differenceInDays;
+    }
+    // Format dates for lottery end dates
+    function formatIsoDate(isoDate) {
+        const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    
+        const date = new Date(isoDate);
+        const year = date.getFullYear();
+        const month = months[date.getMonth()];
+        const day = date.getDate();
+    
+        return `${month} ${day}, ${year}`;
+    }
+    
+
     const ModalType = () => {
         if (selectedPin?.project_id) {
             // Modal for Affordable Housing data from the city
@@ -39,13 +62,8 @@ const BuildingModal = ({selectedPin, showPinDetails, setShowPinDetails}) => {
                     <Modal.Body>Residential Building in {selectedPin?.city}</Modal.Body>
                     <Modal.Body>(#) affordable units</Modal.Body>
                     <Modal.Footer>
-                        <Modal.Body>(x?) studio units</Modal.Body>
-                        <Modal.Body>(x?) 1 bedroom units</Modal.Body>
-                        <Modal.Body>(x?) 2 bedroom units</Modal.Body>
-                        <Modal.Body>(x?) 3 bedroom units</Modal.Body>
-                        <Modal.Body>(x?) 4 bedroom units</Modal.Body>
-                        <Modal.Body>(x?) 5 bedroom units</Modal.Body>
-                        <Modal.Body>(x?) 6 bedroom units</Modal.Body>
+                        <Button>Leave Feedback</Button>
+                        <Button>Verify Stabilized Unit</Button>
                     </Modal.Footer>
                 </Modal>
             )
@@ -60,13 +78,20 @@ const BuildingModal = ({selectedPin, showPinDetails, setShowPinDetails}) => {
                     </Modal.Header>
                     <Modal.Body>
                         <h4>${selectedPin?.price}</h4>
+                        <p>Residential Building in {selectedPin?.city}</p>
                         <p>{selectedPin?.beds} bed(s)</p>
                         <p>{selectedPin?.baths} bath(s)</p>
-                        <p>Residential Building in {selectedPin?.city}</p>
-                        <Carousel interval={null}>
+                        <Carousel interval={null} data-bs-theme="dark">
                             {images.map(img =>
-                                <Carousel.Item key={img}>
-                                    <Image src={img}/>
+                                <Carousel.Item key={img} style={{ position: 'relative', height: '500px' }}>
+                                <Image style={{ 
+                                    position: 'absolute', 
+                                    // top: '50%', 
+                                    left: '50%', 
+                                    transform: 'translate(-50%, 0%)',
+                                    maxHeight: '100%',
+                                    // maxWidth: '100%'
+                                }} src={img}/>
                                 </Carousel.Item>
                             )}
                         </Carousel>
@@ -82,20 +107,33 @@ const BuildingModal = ({selectedPin, showPinDetails, setShowPinDetails}) => {
             let posting = JSON.parse(selectedPin.posting)
             let units = JSON.parse(selectedPin.units)
             // Modal for Rent Stabilized unit listing data
+
+            let daysTilClose = daysUntil(selectedPin?.endDate)
+            let dateOfClose = formatIsoDate(selectedPin?.endDate)
+            console.log(selectedPin)
             return (
                 <Modal centered show={showPinDetails} onHide={handleCloseModal}>
                     <Modal.Header closeButton>
                         <Modal.Title>{selectedPin?.address} {selectedPin?.unit}</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
+                        <h5>Lottery closes in {daysTilClose} days - {dateOfClose}</h5>
                         <p>New Construction in {selectedPin?.city}</p>
+                        <p>Eligible Income: ${selectedPin?.minIncome} - ${selectedPin?.maxIncome}</p>
                         {units.map(unit =>
                             <p>{unit.beds} beds at ${unit.price} (x{unit.quantity})</p>
                             )}
-                        <Carousel interval={null}>
+                        <Carousel interval={null} data-bs-theme="dark">
                             {images.map(img =>
-                                <Carousel.Item key={img}>
-                                    <Image src={img}/>
+                                <Carousel.Item key={img} style={{ position: 'relative', height: '500px' }}>
+                                    <Image style={{ 
+                                        position: 'absolute', 
+                                        top: '50%', 
+                                        left: '50%', 
+                                        transform: 'translate(-50%, -50%)',
+                                        maxHeight: '100%',
+                                        maxWidth: '100%'
+                                    }} src={img}/>
                                 </Carousel.Item>
                             )}
                         </Carousel>

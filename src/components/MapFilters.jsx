@@ -47,48 +47,55 @@ const MapFilters = ({availableModeToggle, setAvailableModeToggle}) => {
                         </Col>
                     </Row>
                 </Form>
-                
-                <DropdownButton title={minPrice || "Min Price"} onSelect={handleMinPrice}>
-                    <Dropdown.Item as="button" eventKey='$0'>No Min</Dropdown.Item> 
-                    <Dropdown.Divider />
-                    <Dropdown.Item as="button" eventKey='$500'>$500</Dropdown.Item>
-                    <Dropdown.Item as="button" eventKey='$1k'>$1,000</Dropdown.Item>
-                    <Dropdown.Item as="button" eventKey='$1.5k'>$1,500</Dropdown.Item>
-                    <Dropdown.Item as="button" eventKey='$2k'>$2,000</Dropdown.Item>
-                    <Dropdown.Item as="button" eventKey='$2.5k'>$2,500</Dropdown.Item>
-                    <Dropdown.Item as="button" eventKey='$3k'>$3,000</Dropdown.Item>
-                    <Dropdown.Item as="button" eventKey='$3.5k'>$3,500</Dropdown.Item>
-                    <Dropdown.Item as="button" eventKey='$4k'>$4,000</Dropdown.Item>
-                    <Dropdown.Item as="button" eventKey='$4.5k'>$4,500</Dropdown.Item>
-                    <Dropdown.Item as="button" eventKey='$5k'>$5,000</Dropdown.Item>
-                    <Dropdown.Item as="button" eventKey='$6k'>$6,000</Dropdown.Item>
-                    <Dropdown.Item as="button" eventKey='$7k'>$7,000</Dropdown.Item>
-                    <Dropdown.Item as="button" eventKey='$8k'>$8,000</Dropdown.Item>
-                    <Dropdown.Item as="button" eventKey='$9k'>$9,000</Dropdown.Item>
-                    <Dropdown.Item as="button" eventKey='$10k'>$10,000</Dropdown.Item>
-                </DropdownButton>
-                <p> to </p>
-                <DropdownButton title={maxPrice || "Max Price"} onSelect={handleMaxPrice}>
-                    <Dropdown.Item as="button" eventKey={'$15k+'}>No Max</Dropdown.Item>
-                    <Dropdown.Divider />
-                    <Dropdown.Item as="button" eventKey='$500'>$500</Dropdown.Item>
-                    <Dropdown.Item as="button" eventKey='$1k'>$1,000</Dropdown.Item>
-                    <Dropdown.Item as="button" eventKey='$1.5k'>$1,500</Dropdown.Item>
-                    <Dropdown.Item as="button" eventKey='$2k'>$2,000</Dropdown.Item>
-                    <Dropdown.Item as="button" eventKey='$2.5k'>$2,500</Dropdown.Item>
-                    <Dropdown.Item as="button" eventKey='$3k'>$3,000</Dropdown.Item>
-                    <Dropdown.Item as="button" eventKey='$3.5k'>$3,500</Dropdown.Item>
-                    <Dropdown.Item as="button" eventKey='$4k'>$4,000</Dropdown.Item>
-                    <Dropdown.Item as="button" eventKey='$4.5k'>$4,500</Dropdown.Item>
-                    <Dropdown.Item as="button" eventKey='$5k'>$5,000</Dropdown.Item>
-                    <Dropdown.Item as="button" eventKey='$6k'>$6,000</Dropdown.Item>
-                    <Dropdown.Item as="button" eventKey='$7k'>$7,000</Dropdown.Item>
-                    <Dropdown.Item as="button" eventKey='$8k'>$8,000</Dropdown.Item>
-                    <Dropdown.Item as="button" eventKey='$9k'>$9,000</Dropdown.Item>
-                    <Dropdown.Item as="button" eventKey='$10k'>$10,000</Dropdown.Item>
-                    <Dropdown.Item as="button" eventKey='$12.5k'>$12,500</Dropdown.Item>
-                    <Dropdown.Item as="button" eventKey='$15k'>$15,000</Dropdown.Item>
-                </DropdownButton>
+                <Row>
+                    <Col>
+                        <DropdownButton title={minPrice || "Min Price"} onSelect={handleMinPrice}>
+                            <Dropdown.Item as="button" eventKey='$0'>No Min</Dropdown.Item> 
+                            <Dropdown.Divider />
+                            <Dropdown.Item as="button" eventKey='$500'>$500</Dropdown.Item>
+                            <Dropdown.Item as="button" eventKey='$1k'>$1,000</Dropdown.Item>
+                            <Dropdown.Item as="button" eventKey='$1.5k'>$1,500</Dropdown.Item>
+                            <Dropdown.Item as="button" eventKey='$2k'>$2,000</Dropdown.Item>
+                            <Dropdown.Item as="button" eventKey='$2.5k'>$2,500</Dropdown.Item>
+                            <Dropdown.Item as="button" eventKey='$3k'>$3,000</Dropdown.Item>
+                            <Dropdown.Item as="button" eventKey='$3.5k'>$3,500</Dropdown.Item>
+                            <Dropdown.Item as="button" eventKey='$4k'>$4,000</Dropdown.Item>
+                            <Dropdown.Item as="button" eventKey='$4.5k'>$4,500</Dropdown.Item>
+                            <Dropdown.Item as="button" eventKey='$5k'>$5,000</Dropdown.Item>
+                            <Dropdown.Item as="button" eventKey='$6k'>$6,000</Dropdown.Item>
+                            <Dropdown.Item as="button" eventKey='$7k'>$7,000</Dropdown.Item>
+                            <Dropdown.Item as="button" eventKey='$8k'>$8,000</Dropdown.Item>
+                            <Dropdown.Item as="button" eventKey='$9k'>$9,000</Dropdown.Item>
+                            <Dropdown.Item as="button" eventKey='$10k'>$10,000</Dropdown.Item>
+                        </DropdownButton>
+                    </Col>
+                    <Col>
+                        <p> to </p>
+                    </Col>
+                    <Col>
+                        <DropdownButton title={maxPrice || "Max Price"} onSelect={handleMaxPrice}>
+                            <Dropdown.Item as="button" eventKey={'$15k+'}>No Max</Dropdown.Item>
+                            <Dropdown.Divider />
+                            <Dropdown.Item as="button" eventKey='$500'>$500</Dropdown.Item>
+                            <Dropdown.Item as="button" eventKey='$1k'>$1,000</Dropdown.Item>
+                            <Dropdown.Item as="button" eventKey='$1.5k'>$1,500</Dropdown.Item>
+                            <Dropdown.Item as="button" eventKey='$2k'>$2,000</Dropdown.Item>
+                            <Dropdown.Item as="button" eventKey='$2.5k'>$2,500</Dropdown.Item>
+                            <Dropdown.Item as="button" eventKey='$3k'>$3,000</Dropdown.Item>
+                            <Dropdown.Item as="button" eventKey='$3.5k'>$3,500</Dropdown.Item>
+                            <Dropdown.Item as="button" eventKey='$4k'>$4,000</Dropdown.Item>
+                            <Dropdown.Item as="button" eventKey='$4.5k'>$4,500</Dropdown.Item>
+                            <Dropdown.Item as="button" eventKey='$5k'>$5,000</Dropdown.Item>
+                            <Dropdown.Item as="button" eventKey='$6k'>$6,000</Dropdown.Item>
+                            <Dropdown.Item as="button" eventKey='$7k'>$7,000</Dropdown.Item>
+                            <Dropdown.Item as="button" eventKey='$8k'>$8,000</Dropdown.Item>
+                            <Dropdown.Item as="button" eventKey='$9k'>$9,000</Dropdown.Item>
+                            <Dropdown.Item as="button" eventKey='$10k'>$10,000</Dropdown.Item>
+                            <Dropdown.Item as="button" eventKey='$12.5k'>$12,500</Dropdown.Item>
+                            <Dropdown.Item as="button" eventKey='$15k'>$15,000</Dropdown.Item>
+                        </DropdownButton>
+                    </Col>
+                </Row>                
                 <DropdownButton title={beds || "Beds"} onSelect={handleBeds}>
                     <Dropdown.Item as="button" eventKey={"Any Beds"}>Any</Dropdown.Item>
                     <Dropdown.Divider />

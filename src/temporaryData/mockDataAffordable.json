@@ -3,6 +3,9 @@
         "type": "affordable lottery",
         "address": "1417 Avenue J",
         "city": "Brooklyn",
+        "endDate": "2023-12-13T23:59:59-05:00",
+        "minIncome": 75738,
+        "maxIncome": 198250,
         "units": [
             {
                 "beds": 1,
@@ -26,5 +29,85 @@
         ],
         "latitude": 40.6252,
         "longitude": -73.96118
+    },
+    {
+        "type": "affordable lottery",
+        "address": "5920 Bay Parkway",
+        "city": "Brooklyn",
+        "endDate": "2023-12-11T23:59:59-05:00",
+        "minIncome": 54858,
+        "maxIncome": 198250,
+        "units": [
+            {
+                "beds": "studio",
+                "quantity": 3,
+                "price": "2295+"
+            },
+            {
+                "beds": 1,
+                "quantity": 4,
+                "price": "2125+"
+            },
+            {
+                "beds": 2,
+                "quantity": 7,
+                "price": "1931+"
+            }
+        ],
+        "posting": {
+            "platform": "Housing Connect NYC",
+            "link": "https://housingconnect.nyc.gov/PublicWeb/details/4107"
+        },
+        "images": [
+            "https://a806-housingconnectapi.nyc.gov/MailTemplates/photos/23217835.png",
+            "https://a806-housingconnectapi.nyc.gov/MailTemplates/photos/23217802.png",
+            "https://a806-housingconnectapi.nyc.gov/MailTemplates/photos/23217814.png"
+        ],
+        "latitude": 40.617009,
+        "longitude": -73.978543
+    },
+    {
+        "type": "affordable lottery",
+        "address": "505 State St",
+        "city": "Brooklyn",
+        "endDate": "2023-12-11T23:59:59-05:00",
+        "minIncome": 29109,
+        "maxIncome": 127100,
+        "units": [
+            {
+                "beds": "studio",
+                "quantity": 5,
+                "price": "763+"
+            },
+            {
+                "beds": 1,
+                "quantity": 32,
+                "price": "812+"
+            },
+            {
+                "beds": 2,
+                "quantity": 6,
+                "price": "965+"
+            },
+            {
+                "beds": 3,
+                "quantity": 2,
+                "price": "1105+"
+            }
+        ],
+        "posting": {
+            "platform": "Housing Connect NYC",
+            "link": "https://housingconnect.nyc.gov/PublicWeb/details/4136"
+        },
+        "images": [
+            "https://a806-housingconnectapi.nyc.gov/MailTemplates/photos/23321823.png",
+            "https://a806-housingconnectapi.nyc.gov/MailTemplates/photos/23321834.png",
+            "https://a806-housingconnectapi.nyc.gov/MailTemplates/photos/23321850.png",
+            "https://a806-housingconnectapi.nyc.gov/MailTemplates/photos/23321856.png",
+            "https://a806-housingconnectapi.nyc.gov/MailTemplates/photos/23321872.png",
+            "https://a806-housingconnectapi.nyc.gov/MailTemplates/photos/23321877.png"
+        ],
+        "latitude": 40.617009,
+        "longitude": -73.978543
     }
 ]
