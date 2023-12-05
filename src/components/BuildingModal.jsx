@@ -1,5 +1,7 @@
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import Carousel from 'react-bootstrap/Carousel';
+import Image from 'react-bootstrap/Image';
 
 const BuildingModal = ({selectedPin, showPinDetails, setShowPinDetails}) => {
     const handleCloseModal = () => {
@@ -8,8 +10,9 @@ const BuildingModal = ({selectedPin, showPinDetails, setShowPinDetails}) => {
 
     const ModalType = () => {
         if (selectedPin?.project_id) {
+            // Modal for Affordable Housing data from the city
             return (
-                <Modal show={showPinDetails} onHide={handleCloseModal}>
+                <Modal centered show={showPinDetails} onHide={handleCloseModal}>
                     <Modal.Header closeButton>
                         <Modal.Title>{selectedPin?.project_name}</Modal.Title>
                     </Modal.Header>
@@ -27,12 +30,13 @@ const BuildingModal = ({selectedPin, showPinDetails, setShowPinDetails}) => {
                 </Modal>
             )
         } else if (selectedPin?.bldgno1) {
+            // Modal for Rent Stabilized Building data from the city
             return (
-                <Modal show={showPinDetails} onHide={handleCloseModal}>
+                <Modal centered show={showPinDetails} onHide={handleCloseModal}>
                     <Modal.Header closeButton>
                         <Modal.Title>{selectedPin?.address.split(',')[0]}</Modal.Title>
                     </Modal.Header>
-                    <Modal.Body>Existing Building in {selectedPin?.city}</Modal.Body>
+                    <Modal.Body>Residential Building in {selectedPin?.city}</Modal.Body>
                     <Modal.Body>(#) affordable units</Modal.Body>
                     <Modal.Footer>
                         <Modal.Body>(x?) studio units</Modal.Body>
@@ -45,10 +49,33 @@ const BuildingModal = ({selectedPin, showPinDetails, setShowPinDetails}) => {
                     </Modal.Footer>
                 </Modal>
             )
-
+        } else if (selectedPin?.type === "stabilized listing") {
+            let images = JSON.parse(selectedPin.images)
+            let posting = JSON.parse(selectedPin.posting)
+            // Modal for Rent Stabilized unit listing data
+            return (
+                <Modal centered show={showPinDetails} onHide={handleCloseModal}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>{selectedPin?.address} {selectedPin?.unit}</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>Residential Building in {selectedPin?.city}</Modal.Body>
+                    <Modal.Body>
+                        <Carousel interval={null}>
+                            {images.map(img =>
+                                <Carousel.Item key={selectedPin.address}>
+                                    <Image src={img}/>
+                                </Carousel.Item>
+                            )}
+                        </Carousel>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button href={posting.link} target='_blank'>Go To Listing</Button>
+                    </Modal.Footer>
+                </Modal>
+            )
         } else {
             return (
-                <Modal show={showPinDetails} onHide={handleCloseModal}>
+                <Modal centered show={showPinDetails} onHide={handleCloseModal}>
                     <Modal.Header closeButton>
                         <Modal.Title>Error</Modal.Title>
                     </Modal.Header>

@@ -23,7 +23,18 @@ const BuildingCard = ({pin, handlePinClick}) => {
                     </Card.Body>
                 </Card>
             )
-        } else {
+        } else if (pin.type === "stabilized listing") {
+            return (
+                <Card onClick={()=> handlePinClick(pin)}>
+                    <Card.Header>Rent Stabilized</Card.Header>
+                    <Card.Body>
+                        <Card.Title>{pin.address.split(',')[0]}</Card.Title>
+                        <Card.Text>(#) affordable units</Card.Text>
+                    </Card.Body>
+                </Card>
+            )
+        }
+        else {
             return (
                 <Card onClick={()=> handlePinClick(pin)}>
                     <Card.Body>
