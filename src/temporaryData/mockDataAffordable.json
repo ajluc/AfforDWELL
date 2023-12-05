@@ -1,0 +1,30 @@
+[
+    {
+        "type": "affordable lottery",
+        "address": "1417 Avenue J",
+        "city": "Brooklyn",
+        "units": [
+            {
+                "beds": 1,
+                "quantity": 5,
+                "price": 2209
+            },
+            {
+                "beds": 2,
+                "quantity": 1,
+                "price": 2463
+            }
+        ],
+        "posting": {
+            "platform": "Housing Connect NYC",
+            "link": "https://housingconnect.nyc.gov/PublicWeb/details/4246"
+        },
+        "images": [
+            "https://a806-housingconnectapi.nyc.gov/MailTemplates/photos/23866487.png",
+            "https://a806-housingconnectapi.nyc.gov/MailTemplates/photos/23866464.png",
+            "https://a806-housingconnectapi.nyc.gov/MailTemplates/photos/23866506.png"
+        ],
+        "latitude": 40.6252,
+        "longitude": -73.96118
+    }
+]

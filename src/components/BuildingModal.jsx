@@ -77,6 +77,35 @@ const BuildingModal = ({selectedPin, showPinDetails, setShowPinDetails}) => {
                     </Modal.Footer>
                 </Modal>
             )
+        } else if (selectedPin?.type === "affordable lottery") {
+            let images = JSON.parse(selectedPin.images)
+            let posting = JSON.parse(selectedPin.posting)
+            let units = JSON.parse(selectedPin.units)
+            // Modal for Rent Stabilized unit listing data
+            return (
+                <Modal centered show={showPinDetails} onHide={handleCloseModal}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>{selectedPin?.address} {selectedPin?.unit}</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <p>New Construction in {selectedPin?.city}</p>
+                        {units.map(unit =>
+                            <p>{unit.beds} beds at ${unit.price} (x{unit.quantity})</p>
+                            )}
+                        <Carousel interval={null}>
+                            {images.map(img =>
+                                <Carousel.Item key={img}>
+                                    <Image src={img}/>
+                                </Carousel.Item>
+                            )}
+                        </Carousel>
+                    </Modal.Body>
+                    <Modal.Footer>
+                    <p>This listing was found on {posting.platform}</p>
+                        <Button href={posting.link} target='_blank'>Go To Listing</Button>
+                    </Modal.Footer>
+                </Modal>
+            )
         } else {
             return (
                 <Modal centered show={showPinDetails} onHide={handleCloseModal}>

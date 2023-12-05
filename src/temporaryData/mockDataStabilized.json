@@ -18,5 +18,102 @@
         ],
         "latitude": 40.69505,
         "longitude": -73.97224
+    },
+    {
+        "type": "stabilized listing",
+        "address": "220 Water St",
+        "unit": "#433",
+        "city": "Brooklyn",
+        "posting": {
+            "platform": "StreetEasy",
+            "link": "https://streeteasy.com/building/220-water/433"
+        },
+        "beds": 3,
+        "baths": 2,
+        "price": 8295,
+        "images": [
+            "https://photos.zillowstatic.com/fp/227a3a0058c3deaab0f7618bdecbd360-se_large_800_400.webp",
+            "https://photos.zillowstatic.com/fp/2e1bbc6f8246c807a45a6a93c1f1d2a5-se_large_800_400.webp",
+            "https://photos.zillowstatic.com/fp/4a4f051d2104a79b47e6a4948280ec38-se_large_800_400.webp",
+            "https://photos.zillowstatic.com/fp/31fac6395239fe2cc4cc8cf67898a78c-se_large_800_400.webp",
+            "https://photos.zillowstatic.com/fp/e1a6e1779e527083fb581d9881b3247a-se_large_800_400.webp"
+        ],
+        "latitude": 40.70260,
+        "longitude": -73.98514
+    },
+    {
+        "type": "stabilized listing",
+        "address": "624 11th St",
+        "unit": "#20",
+        "city": "Brooklyn",
+        "posting": {
+            "platform": "StreetEasy",
+            "link": "https://streeteasy.com/building/624-11-street-brooklyn/20"
+        },
+        "beds": 5,
+        "baths": 2,
+        "price": 9995,
+        "images": [
+            "https://photos.zillowstatic.com/fp/253bf4047ba3a39f1199e9b6a2c1d1dc-se_large_800_400.webp",
+            "https://photos.zillowstatic.com/fp/4cc93a2758c8ecacd85cd897018bad45-se_large_800_400.webp",
+            "https://photos.zillowstatic.com/fp/d553c0bf0facd1039015cc2ba142e620-se_large_800_400.webp",
+            "https://photos.zillowstatic.com/fp/d890b5cfacf608bb18c4bb88ce7f7305-se_large_800_400.webp",
+            "https://photos.zillowstatic.com/fp/de670fbee9737e385f851cc221d04bd2-se_large_800_400.webp",
+            "https://photos.zillowstatic.com/fp/1fbd6d2d07b9797eb2f1b45c7da9c3dc-se_large_800_400.webp",
+            "https://photos.zillowstatic.com/fp/60e467089420dfe6e3490e1805c708e2-se_large_800_400.webp",
+            "https://photos.zillowstatic.com/fp/a4131cafb411bb5b73ee5f639a1b8256-se_large_800_400.webp",
+            "https://photos.zillowstatic.com/fp/d60decb677654c52ea08c0a66b7237a2-se_large_800_400.webp",
+            "https://photos.zillowstatic.com/fp/63fe5f01b460cbc03df44d0a55d9a2ce-se_large_800_400.webp",
+            "https://photos.zillowstatic.com/fp/cab5e5e3eadca746c91483e1f360ee30-se_large_800_400.webp",
+            "https://s3.amazonaws.com/img.streeteasy.com/nyc/attachments/36730729/large/4a4d16d21569691f1f845bacc8e877da577e2d5b.jpg"
+        ],
+        "latitude": 40.64859,
+        "longitude": -73.97766
+    },
+    {
+        "type": "stabilized listing",
+        "address": "1133 Manhattan Ave",
+        "unit": "#N233",
+        "city": "Brooklyn",
+        "posting": {
+            "platform": "StreetEasy",
+            "link": "https://streeteasy.com/building/eleven33-1133-manhattan-avenue-brooklyn/n233"
+        },
+        "beds": 1,
+        "baths": 1,
+        "price": 4352,
+        "images": [
+            "https://photos.zillowstatic.com/fp/006791997fb0e6f6c24b39a4b5fd2aac-se_large_800_400.webp",
+            "https://photos.zillowstatic.com/fp/72321fb17e327bf6329bf00676eb526f-se_large_800_400.webp",
+            "https://photos.zillowstatic.com/fp/ef68a0a37fbf46680a631b582fe99439-se_large_800_400.webp",
+            "https://photos.zillowstatic.com/fp/70fcd3c73b3ad8671d14b1ef0e5ab029-se_large_800_400.webp",
+            "https://photos.zillowstatic.com/fp/e74ea18a5949329d20a6f069f22b4dcf-se_large_800_400.webp"
+        ],
+        "latitude": 40.73716,
+        "longitude": -73.9554
+    },
+    {
+        "type": "stabilized listing",
+        "address": "525 4th St",
+        "unit": "#S1",
+        "city": "Brooklyn",
+        "posting": {
+            "platform": "StreetEasy",
+            "link": "https://streeteasy.com/building/525-4-street-brooklyn/s1"
+        },
+        "beds": 2,
+        "baths": 2,
+        "price": 4995,
+        "images": [
+            "https://photos.zillowstatic.com/fp/fb1673274837c544d9bdd43bbba52673-se_large_800_400.webp",
+            "https://photos.zillowstatic.com/fp/9af9220d86896c41bc3011beefc12b22-se_large_800_400.webp",
+            "https://photos.zillowstatic.com/fp/1b27a9e12da5df35a314eba225b2f1c2-se_large_800_400.webp",
+            "https://photos.zillowstatic.com/fp/bd5cc2723cd09fcc9399a85e43fb5365-se_large_800_400.webp",
+            "https://photos.zillowstatic.com/fp/3a5af28f73d7172fd8068382d9098eee-se_large_800_400.webp",
+            "https://photos.zillowstatic.com/fp/6c2cb80349aa0681ac7ca57ba98b9943-se_large_800_400.webp",
+            "https://photos.zillowstatic.com/fp/f83ffd19cfaac4efe08b214b58436138-se_large_800_400.webp"
+        ],
+        "latitude": 40.66858,
+        "longitude": -73.97631
     }
 ]

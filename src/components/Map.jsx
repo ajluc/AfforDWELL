@@ -3,6 +3,7 @@ import mapboxgl from 'mapbox-gl';
 // import { MapboxSearchBox } from '@mapbox/search-js-web';
 import dataTempStabilized from "../temporaryData/testData.json"
 import mockDataStabilized from "../temporaryData/mockDataStabilized.json"
+import mockDataAffordable from "../temporaryData/mockDataAffordable.json"
 
 const Map = ({ setVisiblePins, handlePinClick, toggleValue, availableModeToggle }) => {
     const mapContainer = useRef(null);
@@ -221,16 +222,24 @@ const Map = ({ setVisiblePins, handlePinClick, toggleValue, availableModeToggle 
                 removeLayerAndSource(map, 'stabilized');
             }
             if (!map.getLayer('affordable-listings')) {
-                handleClusters('affordable-listings', mockDataStabilized, map, '#f9d74a')
+                handleClusters('affordable-listings', mockDataAffordable, map, '#51bbd6')
+            }
+            if (!map.getLayer('stabilized-listings')) {
+                handleClusters('stabilized-listings', mockDataStabilized, map, '#f9d74a')
             }
         } 
         //  Display all buildings (Data Mode)
         else {
-            // Clean up listings layer to avoid doubling up on map markers. Note: currently, these points may not already be displayed on the map since data processing is in progress.
+            // Clean up listings layers to avoid doubling up on map markers. Note: currently, these points may not already be displayed on the map since data processing is in progress.
             if (map.getLayer('affordable-listings')) {
                 removeLayerAndSource(map, 'affordable-listings-cluster-count');
                 removeLayerAndSource(map, 'affordable-listings-unclustered-point');
                 removeLayerAndSource(map, 'affordable-listings');
+            }
+            if (map.getLayer('stabilized-listings')) {
+                removeLayerAndSource(map, 'stabilized-listings-cluster-count');
+                removeLayerAndSource(map, 'stabilized-listings-unclustered-point');
+                removeLayerAndSource(map, 'stabilized-listings');
             }
 
             // run the handle function to put data on the map for both stabilized and affordable units, depending on toggle state
