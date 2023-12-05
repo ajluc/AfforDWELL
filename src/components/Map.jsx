@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 // import { MapboxSearchBox } from '@mapbox/search-js-web';
-import dataTempStabilized from "../temporaryData/testDataStatenIsland.json"
+import dataTempStabilized from "../temporaryData/testData.json"
 import mockDataStabilized from "../temporaryData/mockDataStabilized.json"
 
 const Map = ({ setVisiblePins, handlePinClick, toggleValue, availableModeToggle }) => {
