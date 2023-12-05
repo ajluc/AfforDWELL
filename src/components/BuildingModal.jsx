@@ -58,17 +58,21 @@ const BuildingModal = ({selectedPin, showPinDetails, setShowPinDetails}) => {
                     <Modal.Header closeButton>
                         <Modal.Title>{selectedPin?.address} {selectedPin?.unit}</Modal.Title>
                     </Modal.Header>
-                    <Modal.Body>Residential Building in {selectedPin?.city}</Modal.Body>
                     <Modal.Body>
+                        <h4>${selectedPin?.price}</h4>
+                        <p>{selectedPin?.beds} bed(s)</p>
+                        <p>{selectedPin?.baths} bath(s)</p>
+                        <p>Residential Building in {selectedPin?.city}</p>
                         <Carousel interval={null}>
                             {images.map(img =>
-                                <Carousel.Item key={selectedPin.address}>
+                                <Carousel.Item key={img}>
                                     <Image src={img}/>
                                 </Carousel.Item>
                             )}
                         </Carousel>
                     </Modal.Body>
                     <Modal.Footer>
+                    <p>This listing was found on {posting.platform}</p>
                         <Button href={posting.link} target='_blank'>Go To Listing</Button>
                     </Modal.Footer>
                 </Modal>
