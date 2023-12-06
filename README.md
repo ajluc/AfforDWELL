@@ -2,7 +2,7 @@
 
 ## Date: 11/13/2023
 
-<!-- ### Deployed Page: []() -->
+### Deployed Page: [AfforDWELL](https://affordwellnyc.com/)
 
 ---
 
@@ -16,16 +16,20 @@
 
 AfforDWELL is a hub for New Yorkers to inform themselves on the city’s stabilized rental market. 
 
+Scripts used for data processing can be found [here](https://github.com/ajluc/AfforDWELL-scripts)
+
 ---
 
-<!-- ### **_Technologies Used_**
+### **_Technologies Used_**
 
 - JavaScript
+- Python
 - React
 - CSS3
 - HTML
+- NYC OpenDATA
 
----
+<!-- ---
 
 ### **_Future Updates_**
 
