@@ -79,8 +79,7 @@ const BuildingModal = ({selectedPin, showPinDetails, setShowPinDetails}) => {
                     <Modal.Body>
                         <h4>${selectedPin?.price}</h4>
                         <p>Residential Building in {selectedPin?.city}</p>
-                        <p>{selectedPin?.beds} bed(s)</p>
-                        <p>{selectedPin?.baths} bath(s)</p>
+                        <p>{selectedPin?.beds} bed(s)   |   {selectedPin?.baths} bath(s)</p>
                         <Carousel interval={null} data-bs-theme="dark">
                             {images.map(img =>
                                 <Carousel.Item key={img} style={{ position: 'relative', height: '500px' }}>
