@@ -32,9 +32,9 @@ const Home = () => {
 
     return (
     <div>
-        <MapFilters 
+        {/* <MapFilters 
             availableModeToggle={availableModeToggle}
-            setAvailableModeToggle={setAvailableModeToggle}/>
+            setAvailableModeToggle={setAvailableModeToggle}/> */}
         <div style={{ display: 'flex'}}>
             <MapContainer
                 toggleWidth={toggleWidth}
