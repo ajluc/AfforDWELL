@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import Map from './Map';
+// import Map from './Map';
+import Map2 from './Map2';
 import Button from 'react-bootstrap/Button';
 import { ArrowLeft } from 'react-bootstrap-icons';
 import Stack from 'react-bootstrap/Stack'
@@ -49,7 +50,7 @@ const MapContainer = ({ toggleWidth, visiblePins, setVisiblePins, handlePinClick
                 </Stack>
             </Button>
             <div style={{ width: '100%', height: 'calc(100vh - 3.5rem)'}}>
-                <Map visiblePins={visiblePins} setVisiblePins={setVisiblePins} handlePinClick={handlePinClick} toggleValue={toggleValue} availableModeToggle={availableModeToggle}/>
+                <Map2 visiblePins={visiblePins} setVisiblePins={setVisiblePins} handlePinClick={handlePinClick} toggleValue={toggleValue} availableModeToggle={availableModeToggle}/>
             </div>
 
         </div>
