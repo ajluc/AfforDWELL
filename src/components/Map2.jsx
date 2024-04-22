@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
+import { useNavigate } from 'react-router-dom';
 
 const Map2 = ({ setVisiblePins, handlePinClick, toggleValue, availableModeToggle }) => {
     const mapContainer = useRef(null);
@@ -9,6 +10,8 @@ const Map2 = ({ setVisiblePins, handlePinClick, toggleValue, availableModeToggle
     const [visibleAffordable, setVisibleAffordable] = useState([])
     const [visibleStabilized, setVisibleStabilized] = useState([])
     const [visibleCombined, setVisibleCombined] = useState([])
+
+    const navigate = useNavigate()
 
 
     const handleClusters = (sourceId, sourceData, newMap, color) => {
@@ -84,7 +87,9 @@ const Map2 = ({ setVisiblePins, handlePinClick, toggleValue, availableModeToggle
 
         // When an individual marker is clicked, open building details modal
         newMap.on('click', `${sourceId}-unclustered-point`, (e) => {
-            handlePinClick(e.features[0].properties)
+            // handlePinClick(e.features[0].properties)
+            console.log(e.features[0].properties)
+            navigate(`/details/${e.features[0].properties.bbl}`)
         });
 
         // Change the cursor to a pointer when hovering over clusters and individual markers
