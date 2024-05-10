@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 import Container from 'react-bootstrap/Container'
 import { useParams } from 'react-router-dom'
+import { CircularProgressbar } from 'react-circular-progressbar'
+import 'react-circular-progressbar/dist/styles.css'
 
 const BuildingDetails = () => {
     const { bbl } = useParams()
@@ -34,6 +36,9 @@ const BuildingDetails = () => {
             <h1>Details</h1> 
             <p>{buildingDetails?.address}</p>
             <p>{percentStabilized}% of this building's residential units are rent stabilized.</p>
+            <div style={{ width: 200, height: 200 }}>
+                <CircularProgressbar value={percentStabilized} text={`${percentStabilized}%`}/>
+            </div>
         </Container>
     )
 }
