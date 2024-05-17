@@ -1,8 +1,10 @@
 import Container from 'react-bootstrap/Container'
+import ConstructionModal from '../components/UnderConstructionModal'
 
 const About = () => {
     return (
         <Container>
+            <ConstructionModal />
             <h1>About Us</h1>
             <p>AfforDWELL is a hub for New Yorkers to inform themselves on the city’s stabilized rental market.</p>
             <p>As the #1 most expensive rental market in America, the city of New York has an affordable housing crisis. To fight this the government provides several forms of housing support, including rent stabilization. For the apartment buildings that fall under this legislation – which covers nearly 44% of the rental housing stock – monthly rents can’t be raised by more than 3% annually. Unfortunately, even today the knowledge of these affordable apartments is primarily distributed by word of mouth, and units that are legally required to be stabilized are often rented at market rate to unknowing tenants or warehoused by owners. The only way to verify that a unit is rent stabilized is via submitting information requests one address at a time via the NYS Homes and Community Renewal portal. These requests must be reviewed by a member of the NYS HCR team, and is not a viable option for those actively looking in this fast-paced market.</p>

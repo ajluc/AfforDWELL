@@ -5,6 +5,7 @@ import MapContainer from "../components/MapContainer"
 import Container from 'react-bootstrap/Container';
 import BuildingModal from '../components/BuildingModal';
 import MapFilters from '../components/MapFilters';
+import ConstructionModal from '../components/UnderConstructionModal';
 
 const Home = () => {
     // State and toggle for opening and closing the cards container panel
@@ -32,6 +33,7 @@ const Home = () => {
 
     return (
     <div>
+        <ConstructionModal />
         {/* <MapFilters 
             availableModeToggle={availableModeToggle}
             setAvailableModeToggle={setAvailableModeToggle}/> */}
