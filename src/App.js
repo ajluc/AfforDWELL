@@ -10,8 +10,9 @@ function App() {
     <div className="App">
       <NavBar />
       <Routes>
-        <Route path='/' element={<Landing />}/>
-        <Route path='/map' element={<Home />}/>
+        <Route path='/' element={<Home />}/>
+        {/* <Route path='/' element={<Landing />}/> */}
+        {/* <Route path='/map' element={<Home />}/> */}
         <Route path='/about' element={<About />}/>
         <Route path='/details/:bbl' element={<BuildingDetails />}/>
       </Routes>
