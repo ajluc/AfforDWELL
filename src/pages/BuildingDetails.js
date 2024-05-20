@@ -41,7 +41,7 @@ const BuildingDetails = () => {
                 <Col xs={12} md={8} className="scrollable-column order-md-1 order-2">
                 <div className="content">
                     <PercentDial percentStabilized={percentStabilized}/>
-                    <RentOverTimeChart />
+                    <RentOverTimeChart data={[buildingDetails?.uc2018, buildingDetails?.uc2019, buildingDetails?.uc2020, buildingDetails?.uc2021]}/>
                     <p>{percentStabilized}% of this building's residential units are rent stabilized.</p>
                 </div>
                 </Col>
