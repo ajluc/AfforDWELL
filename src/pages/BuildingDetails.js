@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react'
 import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 import { useParams } from 'react-router-dom'
-import { CircularProgressbar } from 'react-circular-progressbar'
-import 'react-circular-progressbar/dist/styles.css'
 import ConstructionModal from '../components/UnderConstructionModal'
+import PercentDial from '../components/BuildingDetails/PercentDial'
+import RentOverTimeChart from '../components/BuildingDetails/RentOverTimeChart'
 
 const BuildingDetails = () => {
     const { bbl } = useParams()
@@ -35,12 +37,22 @@ const BuildingDetails = () => {
     return (
         <Container>
             <ConstructionModal />
-            <h1>Details</h1> 
-            <p>{buildingDetails?.address}</p>
-            <p>{percentStabilized}% of this building's residential units are rent stabilized.</p>
-            <div style={{ width: 200, height: 200 }}>
-                <CircularProgressbar value={percentStabilized} text={`${percentStabilized}%`}/>
-            </div>
+            <Row>
+                <Col xs={12} md={8} className="scrollable-column order-md-1 order-2">
+                <div className="content">
+                    <PercentDial percentStabilized={percentStabilized}/>
+                    <RentOverTimeChart />
+                    <p>{percentStabilized}% of this building's residential units are rent stabilized.</p>
+                </div>
+                </Col>
+                <Col xs={12} md={4} className="fixed-column order-md-2 order-1">
+                <div className="info">
+                    <p>Your fixed info...</p>
+                    <h1>Details</h1> 
+                    <p>{buildingDetails?.address}</p>
+                </div>
+                </Col>
+            </Row>
         </Container>
     )
 }
