@@ -36,7 +36,7 @@ const BuildingDetails = () => {
 
     return (
         <Container>
-            <ConstructionModal />
+            {/* <ConstructionModal /> */}
             <Row>
                 <Col xs={12} md={8} className="scrollable-column order-md-1 order-2">
                 <div className="content">
