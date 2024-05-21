@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom'
 import ConstructionModal from '../components/UnderConstructionModal'
 import PercentDial from '../components/BuildingDetails/PercentDial'
 import RentOverTimeChart from '../components/BuildingDetails/RentOverTimeChart'
+import StreetView from '../components/BuildingDetails/StreetView'
 
 const BuildingDetails = () => {
     const { bbl } = useParams()
@@ -35,10 +36,10 @@ const BuildingDetails = () => {
     }, [bbl])
 
     return (
-        <Container>
+        <Container className='container-fixed-width'>
             {/* <ConstructionModal /> */}
             <Row>
-                <Col xs={12} md={8} className="scrollable-column order-md-1 order-2">
+                <Col xs={12} md={7} className="scrollable-column order-md-1 order-2">
                 <div className="content">
                     <PercentDial percentStabilized={percentStabilized}/>
                     <RentOverTimeChart data={[buildingDetails?.uc2018, buildingDetails?.uc2019, buildingDetails?.uc2020, buildingDetails?.uc2021]}/>
@@ -47,9 +48,9 @@ const BuildingDetails = () => {
                 </Col>
                 <Col xs={12} md={4} className="fixed-column order-md-2 order-1">
                 <div className="info">
-                    <p>Your fixed info...</p>
                     <h1>Details</h1> 
                     <p>{buildingDetails?.address}</p>
+                    <StreetView latitude={buildingDetails?.latitude} longitude={buildingDetails?.longitude} address={buildingDetails?.address}/>
                 </div>
                 </Col>
             </Row>

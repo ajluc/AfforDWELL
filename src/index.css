@@ -13,6 +13,9 @@ code {
 } */
 
 /* BuildingDetails.js layout styling */
+.container-fixed-width {
+  max-width: 980px;
+}
 .scrollable-column {
   height: 100vh;
   overflow-y: auto;
@@ -23,6 +26,7 @@ code {
   position: fixed;
   right: 0;
   top: 3.5rem; /* Margin for nav bar */
+  margin-right: 5rem;
   height: 100vh;
   padding: 20px;
   background-color: #f8f9fa;
@@ -40,4 +44,10 @@ code {
     height: auto;
     overflow-y: visible;
   }
+}
+
+/* Street View Styling */
+.street-view-container {
+  height: 300px; /* Height set by Google Streetview API call */
+  overflow: hidden; /* Hide overflow */
 }
