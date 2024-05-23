@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Landing from './pages/Landing';
 import BuildingDetails from './pages/BuildingDetails';
+import Footer from './components/Footer';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path='/about' element={<About />}/>
         <Route path='/details/:bbl' element={<BuildingDetails />}/>
       </Routes>
+      <Footer />
     </div>
   );
 }
