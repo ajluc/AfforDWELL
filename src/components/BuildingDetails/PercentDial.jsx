@@ -1,11 +1,17 @@
 import { CircularProgressbar } from 'react-circular-progressbar'
 import 'react-circular-progressbar/dist/styles.css'
+import Container from 'react-bootstrap/Container'
+import { Row } from 'react-bootstrap'
+
 
 const PercentDial = ({percentStabilized}) => {
     return (
-        <div style={{ width: 200, height: 200 }}>
-            <CircularProgressbar value={percentStabilized} text={`${percentStabilized}%`}/>
-        </div>
+        <Container fluid className="d-flex justify-content-center align-items-center">
+            <Row style={{ width: '70%', margin: '20px 0px' }}>
+                <CircularProgressbar value={percentStabilized} text={`${percentStabilized}%`}/>
+            </Row>
+
+        </Container>
     )
 }
 

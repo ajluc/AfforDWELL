@@ -17,7 +17,7 @@ code {
   max-width: 980px;
 }
 .scrollable-column {
-  height: 100vh;
+  /* height: 100vh; */
   overflow-y: auto;
   padding: 20px;
 }
