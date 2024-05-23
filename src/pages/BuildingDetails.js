@@ -8,6 +8,7 @@ import PercentDial from '../components/BuildingDetails/PercentDial'
 import RentOverTimeChart from '../components/BuildingDetails/RentOverTimeChart'
 import StreetView from '../components/BuildingDetails/StreetView'
 import Card from 'react-bootstrap/Card'
+import Footer from '../components/Footer'
 
 const BuildingDetails = () => {
     const { bbl } = useParams()
@@ -39,9 +40,9 @@ const BuildingDetails = () => {
     }, [bbl])
 
     return (
-        <Container className='container-fixed-width'>
+        <Container fluid className='container-fixed-width'>
             {/* <ConstructionModal /> */}
-            <Row>
+            <Row className='content-row'>
                 <Col xs={12} md={5} className="scrollable-column order-md-1 order-2">
                     <Card>
                         <Card.Body>
@@ -67,14 +68,18 @@ const BuildingDetails = () => {
                         </Card.Body>
                     </Card>
                 </Col>
-                <Col xs={12} md={6} className="fixed-column order-md-2 order-1">
-                <div className="info">
-                    <h1>Details</h1> 
-                    <p>{buildingDetails?.address}</p>
-                    <StreetView latitude={buildingDetails?.latitude} longitude={buildingDetails?.longitude} address={buildingDetails?.address}/>
-                </div>
+                <Col xs={12} md={7} className="fixed-column order-md-2 order-1">
+                    <div className="info">
+                        <h1>Details</h1> 
+                        <p>{buildingDetails?.address}</p>
+                        <StreetView latitude={buildingDetails?.latitude} longitude={buildingDetails?.longitude} address={buildingDetails?.address}/>
+                    </div>
                 </Col>
             </Row>
+            <footer className='footer'>
+                <p>footer content</p>
+                <p>footer content</p>
+            </footer>
         </Container>
     )
 }
