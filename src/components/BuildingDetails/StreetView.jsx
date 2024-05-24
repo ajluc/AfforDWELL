@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import axios from "axios"
+import Card from 'react-bootstrap/Card'
 
 const StreetView = ({ latitude, longitude, address }) => {
     const [imageURL, setImageUrl] = useState()

@@ -12,6 +12,11 @@ code {
     monospace;
 }
 
+.card {
+  margin: 0px 0px 20px;
+  border: none;
+}
+
 /* BuildingDetails.js layout styling */
 .container-fixed-width {
   max-width: 980px;
@@ -21,12 +26,13 @@ code {
 
 .content-row {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .scrollable-column {
   overflow-y: auto;
   flex: 1;
-  padding-right: 10px;
+  /* padding-right: 10px; */
   height: 100%;
 }
 
@@ -48,6 +54,13 @@ code {
 @media (max-width: 980px) {
   .fixed-column {
     position: relative;
+    top: 0;
+    height: auto;
+  }
+
+  .scrollable-column {
+    height: auto;
+    overflow-y: visible;
   }
 }
 
@@ -56,3 +69,4 @@ code {
   height: 300px; /* Height set by Google Streetview API call */
   overflow: hidden; /* Hide overflow */
 }
+
