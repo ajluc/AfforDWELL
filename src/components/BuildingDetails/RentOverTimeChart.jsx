@@ -11,6 +11,8 @@ import {
     Title,
     Tooltip,
     Legend,
+    BarController,
+    LineController
 } from 'chart.js';
 
 ChartJS.register(
@@ -21,7 +23,9 @@ ChartJS.register(
     BarElement,
     Title,
     Tooltip,
-    Legend
+    Legend,
+    BarController,
+    LineController
 );
 
 const RentOverTimeChart = ({ data }) => {
