@@ -10,7 +10,6 @@ const StreetView = ({ latitude, longitude, address }) => {
             const apiKey = process.env.REACT_APP_GOOGLE_API_KEY
             const streetViewURL = `https://maps.googleapis.com/maps/api/streetview?size=600x300&location=${latitude},${longitude}&key=${apiKey}`
             setImageUrl(streetViewURL)
-            console.log(streetViewURL)
         }
         
         // Testing: will geocoded lat/long provide better street view images than BBL converted lat/long?

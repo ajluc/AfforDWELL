@@ -88,7 +88,6 @@ const Map2 = ({ setVisiblePins, handlePinClick, toggleValue, availableModeToggle
         // When an individual marker is clicked, open building details modal
         newMap.on('click', `${sourceId}-unclustered-point`, (e) => {
             // handlePinClick(e.features[0].properties)
-            console.log(e.features[0].properties)
             navigate(`/details/${e.features[0].properties.bbl}`)
         });
 

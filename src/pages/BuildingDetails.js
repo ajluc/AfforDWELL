@@ -69,7 +69,6 @@ const BuildingDetails = () => {
             formatAddress(data.address)
             getBorough(data.ucbbl)
             handlePercentage(data.uc2018, data.uc2019, data.uc2020, data.uc2021, data.unitsres)
-            console.log(response.data)
         }
 
         if (bbl) {
