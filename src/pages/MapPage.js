@@ -7,7 +7,7 @@ import BuildingModal from '../components/BuildingModal';
 import MapFilters from '../components/MapFilters';
 import ConstructionModal from '../components/UnderConstructionModal';
 
-const Home = () => {
+const MapPage = () => {
     // State and toggle for opening and closing the cards container panel
     const [isFullWidth, setIsFullWidth] = useState(true);
     const toggleWidth = () => {
@@ -63,4 +63,4 @@ const Home = () => {
     )
 }
 
-export default Home
+export default MapPage
