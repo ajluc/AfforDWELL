@@ -1,3 +1,8 @@
+:root {
+  --accent-color: #0c6dfd;
+  --background-color: #f8f9fa;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -17,12 +22,47 @@ code {
   border: none;
 }
 
-/* BuildingDetails.js layout styling */
+.footer {
+  margin-top: auto;
+  background: var(--background-color);
+  padding: 10px;
+  text-align: center;
+}
+
 .container-fixed-width {
   max-width: 980px;
   margin: 0 auto;
   padding: 0;
 }
+.container-fixed-landing {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+/* Landing.js styling */
+.hero-text {
+  font-size: 7rem;
+  margin-bottom: 20px;
+}
+.accent-color {
+  color: var(--accent-color)
+}
+.sidekick-text {
+  font-size: 5rem;
+  margin-bottom: 0;
+}
+
+.hero-landing {
+  height: 100vh;
+  padding-top: 80px;
+}
+
+.background-color {
+  background-color: var(--background-color);
+}
+
+/* BuildingDetails.js layout styling */
 
 .content-row {
   display: flex;
@@ -42,13 +82,6 @@ code {
   top: 0;
   flex: 1;
   height: 100%;
-}
-
-.footer {
-  margin-top: auto;
-  background: #f8f9fa;
-  padding: 10px;
-  text-align: center;
 }
 
 @media (max-width: 980px) {
