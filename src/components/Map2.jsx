@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import { useNavigate } from 'react-router-dom';
+import Client from '../services/api';
 
 const Map2 = ({ setVisiblePins, handlePinClick, toggleValue, availableModeToggle }) => {
     const mapContainer = useRef(null);
@@ -128,16 +129,13 @@ const Map2 = ({ setVisiblePins, handlePinClick, toggleValue, availableModeToggle
                 setMap(newMap);
                 // Initial map and card state:
                 // Fetch JSON data for Rent Stabilized Buildings and load on map
-                const stabilized_response = await fetch('/geojson')
-                let stabilized_data = await stabilized_response.json()
+                const stabilized_response = await Client.get('/geojson')
+                let stabilized_data = stabilized_response.data
                 setStabilized(stabilized_data.features)
                 handleClusters('stabilized', stabilized_data, newMap, '#f9d74a')
                 // On load, set state to show all stabilized building cards
                 setVisibleStabilized(dataStabilized)
                 setVisiblePins(visibleStabilized)
-                console.log('stabilized data')
-                console.log(stabilized_data.features)
-                console.log(dataStabilized)
             });
         };
 

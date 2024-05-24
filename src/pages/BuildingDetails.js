@@ -3,12 +3,11 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import { useParams } from 'react-router-dom'
-import ConstructionModal from '../components/UnderConstructionModal'
 import PercentDial from '../components/BuildingDetails/PercentDial'
 import RentOverTimeChart from '../components/BuildingDetails/RentOverTimeChart'
 import StreetView from '../components/BuildingDetails/StreetView'
 import Card from 'react-bootstrap/Card'
-import Footer from '../components/Footer'
+import Client from '../services/api'
 
 const BuildingDetails = () => {
     const { bbl } = useParams()
@@ -27,9 +26,8 @@ const BuildingDetails = () => {
     useEffect(() => {
         const fetchBuildingDetails = async () => {
             setLoading(true)
-            const response = await fetch(`/rentstabs/${bbl}`)
-            const data = await response.json()
-            console.log(data)
+            const response = await Client.get(`/rentstabs/${bbl}`)
+            const data = await response.data
             setBuildingDetails(data)
             handlePercentage(data.uc2018, data.uc2019, data.uc2020, data.uc2021, data.unitsres)
         }
@@ -43,7 +41,6 @@ const BuildingDetails = () => {
         <div>
 
             <Container fluid className='container-fixed-width'>
-                {/* <ConstructionModal /> */}
                 <Row className='content-row'>
                     <Col xs={12} md={5} className="scrollable-column order-md-1 order-2">
                         <Card>
