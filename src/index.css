@@ -101,5 +101,6 @@ code {
 .street-view-container {
   height: 300px; /* Height set by Google Streetview API call */
   overflow: hidden; /* Hide overflow */
+  margin: 100px 0px 25px;
 }
 

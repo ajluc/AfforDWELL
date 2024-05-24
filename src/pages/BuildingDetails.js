@@ -8,6 +8,7 @@ import RentOverTimeChart from '../components/BuildingDetails/RentOverTimeChart'
 import StreetView from '../components/BuildingDetails/StreetView'
 import Card from 'react-bootstrap/Card'
 import Client from '../services/api'
+import Info from '../components/BuildingDetails/Info'
 
 const BuildingDetails = () => {
     const { bbl } = useParams()
@@ -15,12 +16,48 @@ const BuildingDetails = () => {
     const [loading, setLoading] = useState(false)
     const [percentStabilized, setPercent] = useState(null)
     const [mostRecentUc, setMostRecentUc] = useState(null)
+    const [formattedAddress, setFormattedAddress] = useState(null)
+    const [borough, setBorough] = useState(null)
 
     const handlePercentage = (uc2018, uc2019, uc2020, uc2021, unitsres) => {
         const mostRecentData = uc2021 || uc2020 || uc2019 || uc2018 || null
         const percentage = (mostRecentData / parseInt(unitsres, 10)) * 100
         setPercent(percentage.toFixed(0))
         setMostRecentUc(mostRecentData)
+    }
+    
+    const formatAddress = (address) => {
+        const words = address.split(' ')
+        const formattedWords = words.map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+        const formattedAddress = formattedWords.join(' ')
+        setFormattedAddress(formattedAddress)
+    }
+
+    const getBorough = (bbl) => {
+        const boroughCode = parseInt(bbl.toString().charAt(0), 10)
+
+        let borough
+        switch (boroughCode) {
+            case 1:
+                borough = 'Manhattan'
+                break
+            case 2:
+                borough = 'Bronx'
+                break
+            case 3:
+                borough = 'Brooklyn'
+                break
+            case 4:
+                borough = 'Queens'
+                break
+            case 5:
+                borough = 'Staten Island'
+                break
+            default:
+                borough = 'Unknown'
+        }
+
+        setBorough(borough)
     }
 
     useEffect(() => {
@@ -29,13 +66,17 @@ const BuildingDetails = () => {
             const response = await Client.get(`/rentstabs/${bbl}`)
             const data = await response.data
             setBuildingDetails(data)
+            formatAddress(data.address)
+            getBorough(data.ucbbl)
             handlePercentage(data.uc2018, data.uc2019, data.uc2020, data.uc2021, data.unitsres)
+            console.log(response.data)
         }
 
         if (bbl) {
             fetchBuildingDetails()
         }
     }, [bbl])
+
 
     return (
         <div>
@@ -69,14 +110,15 @@ const BuildingDetails = () => {
                     </Col>
                     <Col xs={12} md={7} className="fixed-column order-md-2 order-1">
                         <div>
-                            <h1>Details</h1> 
-                            <p>{buildingDetails?.address}</p>
                             <StreetView latitude={buildingDetails?.latitude} longitude={buildingDetails?.longitude} address={buildingDetails?.address}/>
+                            <Info buildingDetails={buildingDetails} formattedAddress={formattedAddress} borough={borough} mostRecentUc={mostRecentUc}/>
                         </div>
                     </Col>
                 </Row>
             </Container>
             <footer className='footer'>
+                <p>footer content</p>
+                <p>footer content</p>
                 <p>footer content</p>
                 <p>footer content</p>
             </footer>

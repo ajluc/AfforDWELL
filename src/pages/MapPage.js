@@ -33,7 +33,7 @@ const MapPage = () => {
 
     return (
     <div>
-        <ConstructionModal />
+        {/* <ConstructionModal /> */}
         {/* <MapFilters 
             availableModeToggle={availableModeToggle}
             setAvailableModeToggle={setAvailableModeToggle}/> */}

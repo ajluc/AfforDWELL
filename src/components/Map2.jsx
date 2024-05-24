@@ -16,7 +16,6 @@ const Map2 = ({ setVisiblePins, handlePinClick, toggleValue, availableModeToggle
 
 
     const handleClusters = (sourceId, sourceData, newMap, color) => {
-        console.log('ping')
         newMap.addSource(sourceId, {
             type: 'geojson',
             data: sourceData,

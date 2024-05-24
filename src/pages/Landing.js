@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom"
 import SearchBar from '../components/Landing/SearchBar.jsx'
 import SearchModal from '../components/Landing/SearchModal.jsx'
 import { useState, useRef } from 'react'
+import ConstructionModal from "../components/UnderConstructionModal.jsx"
 
 const Landing = () => {
     const navigate = useNavigate()
@@ -22,6 +23,7 @@ const Landing = () => {
     return (
         <div>
             <div className="background-color">
+                <ConstructionModal />
                 <Container className="container-fixed-landing hero-landing">
                     <h1 className="sidekick-text">Is your nyc apartment</h1>
                     <h1 className="hero-text accent-color">RENT STABILIZED?</h1>
