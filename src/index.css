@@ -1,4 +1,9 @@
-/* body {
+:root {
+  --accent-color: #0c6dfd;
+  --background-color: #f8f9fa;
+}
+
+body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -10,4 +15,92 @@
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
-} */
+}
+
+.card {
+  margin: 0px 0px 20px;
+  border: none;
+}
+
+.footer {
+  margin-top: auto;
+  background: var(--background-color);
+  padding: 10px;
+  text-align: center;
+}
+
+.container-fixed-width {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0;
+}
+.container-fixed-landing {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+/* Landing.js styling */
+.hero-text {
+  font-size: 7rem;
+  margin-bottom: 20px;
+}
+.accent-color {
+  color: var(--accent-color)
+}
+.sidekick-text {
+  font-size: 5rem;
+  margin-bottom: 0;
+}
+
+.hero-landing {
+  height: 100vh;
+  padding-top: 80px;
+}
+
+.background-color {
+  background-color: var(--background-color);
+}
+
+/* BuildingDetails.js layout styling */
+
+.content-row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.scrollable-column {
+  overflow-y: auto;
+  flex: 1;
+  /* padding-right: 10px; */
+  height: 100%;
+}
+
+.fixed-column {
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 0;
+  flex: 1;
+  height: 100%;
+}
+
+@media (max-width: 980px) {
+  .fixed-column {
+    position: relative;
+    top: 0;
+    height: auto;
+  }
+
+  .scrollable-column {
+    height: auto;
+    overflow-y: visible;
+  }
+}
+
+/* Street View Styling */
+.street-view-container {
+  height: 300px; /* Height set by Google Streetview API call */
+  overflow: hidden; /* Hide overflow */
+  margin: 100px 0px 25px;
+}
+
