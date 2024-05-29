@@ -1,14 +1,33 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 // import Map from './Map';
 import Map2 from './Map2';
+import { SearchBox } from '@mapbox/search-js-react';
+
 import Button from 'react-bootstrap/Button';
 import { ArrowLeft } from 'react-bootstrap-icons';
 import Stack from 'react-bootstrap/Stack'
 import ToggleButton from 'react-bootstrap/ToggleButton';
 import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup'
 
-const MapContainer = ({ toggleWidth, visiblePins, setVisiblePins, handlePinClick, setCurrentPage, availableModeToggle }) => {
+const MapContainer = ({ toggleWidth, visiblePins, setVisiblePins, handlePinClick, setCurrentPage, availableModeToggle, mapSearchResult }) => {
     const [isArrowFlipped, setIsArrowFlipped] = useState(false);
+    const [mapInstance, setMapInstance] = useState(null)
+
+    const handleSearch = (query) => {
+        if (query && mapInstance) {
+            const [lon, lat] = query.features[0].geometry.coordinates
+            mapInstance.easeTo({
+                center: [lon, lat],
+                zoom: 18
+            })
+        }
+    }
+
+    useEffect(() => {
+        if (mapSearchResult && mapInstance) {
+            handleSearch(mapSearchResult)
+        }
+    }, [mapSearchResult, mapInstance])
 
     const handleArrowClick = () => {
         setIsArrowFlipped(!isArrowFlipped);
@@ -49,8 +68,18 @@ const MapContainer = ({ toggleWidth, visiblePins, setVisiblePins, handlePinClick
                     <ArrowLeft style={{transform: isArrowFlipped ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.6s' }}/>
                 </Stack>
             </Button> */}
+            <SearchBox 
+                accessToken={process.env.REACT_APP_MAPBOX_API_TOKEN}
+                onRetrieve={handleSearch}
+                placeholder='Search for a NYC address'
+                value={null}
+                options={{
+                    bbox: '-74.25909,40.477399,-73.700272,40.917577',  // NYC bounding box
+                    types: 'address',
+                }}
+            />
             <div style={{ width: '100%', height: 'calc(100vh - 3.5rem)'}}>
-                <Map2 visiblePins={visiblePins} setVisiblePins={setVisiblePins} handlePinClick={handlePinClick} toggleValue={toggleValue} availableModeToggle={availableModeToggle}/>
+                <Map2 visiblePins={visiblePins} setVisiblePins={setVisiblePins} handlePinClick={handlePinClick} toggleValue={toggleValue} availableModeToggle={availableModeToggle} setMapInstance={setMapInstance}/>
             </div>
 
         </div>

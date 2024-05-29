@@ -1,13 +1,13 @@
 // import Map from "../components/Map"
 import { useState } from 'react';
 import CardsContainer from '../components/CardsContainer';
-import MapContainer from "../components/MapContainer"
+import MapContainer from "../components/Map/MapContainer"
 import Container from 'react-bootstrap/Container';
 import BuildingModal from '../components/BuildingModal';
 import MapFilters from '../components/MapFilters';
 import ConstructionModal from '../components/UnderConstructionModal';
 
-const MapPage = () => {
+const MapPage = ({ mapSearchResult }) => {
     // State and toggle for opening and closing the cards container panel
     const [isFullWidth, setIsFullWidth] = useState(true);
     const toggleWidth = () => {
@@ -45,6 +45,7 @@ const MapPage = () => {
                 style={{ width: isFullWidth ? '100%' : '50%' }} 
                 setCurrentPage={setCurrentPage}
                 availableModeToggle={availableModeToggle}
+                mapSearchResult={mapSearchResult}
             />
             <CardsContainer
                 isVisible={!isFullWidth}

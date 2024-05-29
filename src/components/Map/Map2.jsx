@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import { useNavigate } from 'react-router-dom';
-import Client from '../services/api';
+import Client from '../../services/api';
 
-const Map2 = ({ setVisiblePins, handlePinClick, toggleValue, availableModeToggle }) => {
+const Map2 = ({ setVisiblePins, handlePinClick, toggleValue, availableModeToggle, setMapInstance }) => {
     const mapContainer = useRef(null);
     const [map, setMap] = useState(null);
     const [dataAffordable, setAffordable] = useState(null)
@@ -125,6 +125,7 @@ const Map2 = ({ setVisiblePins, handlePinClick, toggleValue, availableModeToggle
 
             newMap.on('load', async () => {
                 setMap(newMap);
+                setMapInstance(newMap)
                 // Initial map and card state:
                 // Fetch JSON data for Rent Stabilized Buildings and load on map
                 const stabilized_response = await Client.get('/geojson')
