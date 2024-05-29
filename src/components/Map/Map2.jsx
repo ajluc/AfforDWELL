@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import { useNavigate } from 'react-router-dom';
-import Client from '../services/api';
+import Client from '../../services/api';
 
 const Map2 = ({ setVisiblePins, handlePinClick, toggleValue, availableModeToggle }) => {
     const mapContainer = useRef(null);

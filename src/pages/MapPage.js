@@ -1,7 +1,7 @@
 // import Map from "../components/Map"
 import { useState } from 'react';
 import CardsContainer from '../components/CardsContainer';
-import MapContainer from "../components/MapContainer"
+import MapContainer from "../components/Map/MapContainer"
 import Container from 'react-bootstrap/Container';
 import BuildingModal from '../components/BuildingModal';
 import MapFilters from '../components/MapFilters';
