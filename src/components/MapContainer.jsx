@@ -23,7 +23,7 @@ const MapContainer = ({ toggleWidth, visiblePins, setVisiblePins, handlePinClick
 
     return (
         <div style={{ width: '100%', position: 'relative' }}>
-            <ToggleButtonGroup
+            {/* <ToggleButtonGroup
                 type="radio" 
                 name="options" 
                 defaultValue={3} 
@@ -48,7 +48,7 @@ const MapContainer = ({ toggleWidth, visiblePins, setVisiblePins, handlePinClick
                     {isArrowFlipped ? <p style={{marginBottom: "0px", marginRight: "10px"}}>Hide List</p> : <p style={{marginBottom: "0px", marginRight: "10px"}}>Show List</p>}
                     <ArrowLeft style={{transform: isArrowFlipped ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.6s' }}/>
                 </Stack>
-            </Button>
+            </Button> */}
             <div style={{ width: '100%', height: 'calc(100vh - 3.5rem)'}}>
                 <Map2 visiblePins={visiblePins} setVisiblePins={setVisiblePins} handlePinClick={handlePinClick} toggleValue={toggleValue} availableModeToggle={availableModeToggle}/>
             </div>
