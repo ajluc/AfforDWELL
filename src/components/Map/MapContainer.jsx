@@ -23,6 +23,7 @@ const MapContainer = ({ toggleWidth, visiblePins, setVisiblePins, handlePinClick
         }
     }
 
+    // When navigating to map from landing page's search bar, run handleSearch function
     useEffect(() => {
         if (mapSearchResult && mapInstance) {
             handleSearch(mapSearchResult)

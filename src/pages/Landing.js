@@ -1,13 +1,11 @@
 import { Button, Container } from "react-bootstrap"
 import { useNavigate } from "react-router-dom"
-import { useState, useRef } from 'react'
+import { useRef } from 'react'
 import ConstructionModal from "../components/UnderConstructionModal.jsx"
 import { SearchBox } from '@mapbox/search-js-react';
 
 const Landing = ({ setMapSearchResult }) => {
     const navigate = useNavigate()
-    const [showModal, setShowModal] = useState(false)
-    const [searchQuery, setSearchQuery] = useState('')
 
     const handleSearch = (query) => {
         if (query) {
@@ -16,8 +14,7 @@ const Landing = ({ setMapSearchResult }) => {
         }
     }
 
-    const handleClose = () => setShowModal(false)
-
+    // Scroll to learn more section
     const learnMoreRef = useRef(null)
     const scrollToTarget = () => {
         learnMoreRef.current.scrollIntoView({ behavior: 'smooth' })
@@ -31,8 +28,6 @@ const Landing = ({ setMapSearchResult }) => {
                     <h1 className="sidekick-text">Is your nyc apartment</h1>
                     <h1 className="hero-text accent-color">RENT STABILIZED?</h1>
                     <p>We think it should be easier for New Yorkers to find out if their apartment building is rent stabilized. Use the search bar below to find out more about your particular apartment, or browse the map to understand what affordable options exist near you.</p>
-                    {/* <SearchBar onSearch={handleSearch}/>
-                    <SearchModal show={showModal} handleClose={handleClose}/> */}
                     <SearchBox 
                         accessToken={process.env.REACT_APP_MAPBOX_API_TOKEN}
                         onRetrieve={handleSearch}
