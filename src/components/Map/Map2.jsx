@@ -3,7 +3,7 @@ import mapboxgl from 'mapbox-gl';
 import { useNavigate } from 'react-router-dom';
 import Client from '../../services/api';
 
-const Map2 = ({ setVisiblePins, handlePinClick, toggleValue, availableModeToggle, setMapInstance }) => {
+const Map2 = ({ setVisiblePins, handlePinClick, toggleValue, availableModeToggle, setMapInstance, geojson, fetchGeojson }) => {
     const mapContainer = useRef(null);
     const [map, setMap] = useState(null);
     const [dataAffordable, setAffordable] = useState(null)
@@ -128,13 +128,24 @@ const Map2 = ({ setVisiblePins, handlePinClick, toggleValue, availableModeToggle
                 setMapInstance(newMap)
                 // Initial map and card state:
                 // Fetch JSON data for Rent Stabilized Buildings and load on map
-                const stabilized_response = await Client.get('/geojson')
-                let stabilized_data = stabilized_response.data
-                setStabilized(stabilized_data.features)
-                handleClusters('stabilized', stabilized_data, newMap, '#f9d74a')
+                if (geojson) {
+                    handleClusters('stabilized', { type: 'FeatureCollection', features: geojson }, newMap, '#f9d74a')
+                    console.log('if geojson')
+                    console.log(geojson)
+                } else {
+                    fetchGeojson().then(() => {
+                        handleClusters('stabilized', { type: 'FeatureCollection', features: geojson }, newMap, '#f9d74a')
+                        console.log('fetch ping')
+                        console.log(geojson)
+                    })
+                }
+                // const stabilized_response = await Client.get('/geojson')
+                // let stabilized_data = stabilized_response.data
+                // setStabilized(stabilized_data.features)
+                // handleClusters('stabilized', stabilized_data, newMap, '#f9d74a')
                 // On load, set state to show all stabilized building cards
-                setVisibleStabilized(dataStabilized)
-                setVisiblePins(visibleStabilized)
+                // setVisibleStabilized(dataStabilized)
+                // setVisiblePins(visibleStabilized)
             });
         };
 
@@ -142,7 +153,7 @@ const Map2 = ({ setVisiblePins, handlePinClick, toggleValue, availableModeToggle
             initializeMap();
         }
 
-    }, [map]);
+    }, [map, geojson, fetchGeojson]);
 
 
     useEffect (() => {

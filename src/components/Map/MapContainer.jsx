@@ -11,7 +11,7 @@ import ToggleButton from 'react-bootstrap/ToggleButton';
 import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup'
 import mapboxgl from 'mapbox-gl';
 
-const MapContainer = ({ toggleWidth, visiblePins, setVisiblePins, handlePinClick, setCurrentPage, availableModeToggle, mapSearchResult }) => {
+const MapContainer = ({ toggleWidth, visiblePins, setVisiblePins, handlePinClick, setCurrentPage, availableModeToggle, mapSearchResult, geojson, fetchGeojson }) => {
     const [isArrowFlipped, setIsArrowFlipped] = useState(false);
     const [mapInstance, setMapInstance] = useState(null)
 
@@ -125,7 +125,7 @@ const MapContainer = ({ toggleWidth, visiblePins, setVisiblePins, handlePinClick
                 </Stack>
             </Button>
             <div style={{ width: '100%', height: 'calc(100vh - 3.5rem)'}}>
-                <Map2 visiblePins={visiblePins} setVisiblePins={setVisiblePins} handlePinClick={handlePinClick} toggleValue={toggleValue} availableModeToggle={availableModeToggle} setMapInstance={setMapInstance}/>
+                <Map2 visiblePins={visiblePins} setVisiblePins={setVisiblePins} handlePinClick={handlePinClick} toggleValue={toggleValue} availableModeToggle={availableModeToggle} setMapInstance={setMapInstance} geojson={geojson} fetchGeojson={fetchGeojson}/>
             </div>
 
         </div>

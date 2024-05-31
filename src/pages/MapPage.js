@@ -7,7 +7,7 @@ import BuildingModal from '../components/BuildingModal';
 import MapFilters from '../components/MapFilters';
 import DrawerContainer from '../components/BuildingDetails/DrawerContainer';
 
-const MapPage = ({ mapSearchResult }) => {
+const MapPage = ({ mapSearchResult, geojson, fetchGeojson }) => {
     // State and toggle for opening and closing the cards container panel
     const [isFullWidth, setIsFullWidth] = useState(true);
     const toggleWidth = () => {
@@ -45,6 +45,8 @@ const MapPage = ({ mapSearchResult }) => {
                 setCurrentPage={setCurrentPage}
                 availableModeToggle={availableModeToggle}
                 mapSearchResult={mapSearchResult}
+                geojson={geojson}
+                fetchGeojson={fetchGeojson}
             />
             <DrawerContainer 
                 isVisible={!isFullWidth}
