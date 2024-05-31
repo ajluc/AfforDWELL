@@ -5,6 +5,7 @@ import MapContainer from "../components/Map/MapContainer"
 import Container from 'react-bootstrap/Container';
 import BuildingModal from '../components/BuildingModal';
 import MapFilters from '../components/MapFilters';
+import DrawerContainer from '../components/BuildingDetails/DrawerContainer';
 
 const MapPage = ({ mapSearchResult }) => {
     // State and toggle for opening and closing the cards container panel
@@ -45,13 +46,16 @@ const MapPage = ({ mapSearchResult }) => {
                 availableModeToggle={availableModeToggle}
                 mapSearchResult={mapSearchResult}
             />
-            <CardsContainer
+            <DrawerContainer 
+                isVisible={!isFullWidth}
+            />
+            {/* <CardsContainer
                 isVisible={!isFullWidth}
                 visiblePins={visiblePins}
                 handlePinClick={handlePinClick}
                 currentPage={currentPage}
                 setCurrentPage={setCurrentPage}
-            />
+            /> */}
             <BuildingModal
                 selectedPin={selectedPin}
                 showPinDetails={showPinDetails}
