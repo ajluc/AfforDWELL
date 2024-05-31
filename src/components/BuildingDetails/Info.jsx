@@ -11,6 +11,7 @@ const Info = ({ buildingDetails, formattedAddress, borough, mostRecentUc }) => {
                 <p><BuildingAdd /> Built in {buildingDetails?.yearbuilt}</p>
                 <p><DoorClosed /> {buildingDetails?.unitsres}  units total</p>
                 <p><DoorClosedFill /> {mostRecentUc} stabilized units</p>
+                <p>{buildingDetails?.ucbbl}</p>
             </div>
         </div>
     )
