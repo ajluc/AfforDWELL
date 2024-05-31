@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 // import Map from './Map';
 import Map2 from './Map2';
 import { SearchBox } from '@mapbox/search-js-react';
+import Client from '../../services/api';
 
 import Button from 'react-bootstrap/Button';
 import { ArrowLeft } from 'react-bootstrap-icons';
@@ -13,7 +14,14 @@ const MapContainer = ({ toggleWidth, visiblePins, setVisiblePins, handlePinClick
     const [isArrowFlipped, setIsArrowFlipped] = useState(false);
     const [mapInstance, setMapInstance] = useState(null)
 
-    const handleSearch = (query) => {
+    // Format addresses to match back end data
+    const normalizeAddress = (address) => {
+        // Upper case and remove 'st', 'nd', 'rd', 'th'
+        address = address.toUpperCase().replace(/(\d+)(ST|ND|RD|TH)/g, '$1')
+        return address
+    }
+
+    const handleSearch = async (query) => {
         if (query && mapInstance) {
             const [lon, lat] = query.features[0].geometry.coordinates
             mapInstance.easeTo({
@@ -21,6 +29,22 @@ const MapContainer = ({ toggleWidth, visiblePins, setVisiblePins, handlePinClick
                 zoom: 18
             })
         }
+        const normalizedAddress = normalizeAddress(query.features[0].properties.address)
+        try {
+            const buildingDetails = await Client.get('/stabilized',{
+                params: {
+                    address: normalizedAddress
+                }
+            })
+            if (buildingDetails.data.message === 'No match found') {
+                console.log("does not exist in database of stabilized buildings")
+            } else {
+                console.log(buildingDetails.data)
+            }
+        } catch (error) {
+            console.log("Error fetching data: ", error)
+        }
+        console.log(normalizeAddress(query.features[0].properties.address))
     }
 
     // When navigating to map from landing page's search bar, run handleSearch function
@@ -43,42 +67,44 @@ const MapContainer = ({ toggleWidth, visiblePins, setVisiblePins, handlePinClick
 
     return (
         <div style={{ width: '100%', position: 'relative' }}>
-            {/* <ToggleButtonGroup
-                type="radio" 
-                name="options" 
-                defaultValue={3} 
-                onChange={handleToggleClick} 
-                style={{ position: 'absolute', top: 10, left: 10, zIndex: 1000}}
-            >
-                <ToggleButton id="stabilized" value={1}>
-                Rent Stabilized
-                </ToggleButton>
-                <ToggleButton id="affordable" value={2}>
-                Affordable Housing
-                </ToggleButton>
-                <ToggleButton id="all" value={3}>
-                All
-                </ToggleButton>
-            </ToggleButtonGroup>
+            <div style={{ position: 'absolute', top: 10, left: 10, zIndex: 1000, minWidth: '40vw'}}>
+                {/* <ToggleButtonGroup
+                    type="radio" 
+                    name="options" 
+                    defaultValue={3} 
+                    onChange={handleToggleClick} 
+                    // style={{ position: 'absolute', top: 10, left: 10, zIndex: 1000}}
+                >
+                    <ToggleButton id="stabilized" value={1}>
+                    Rent Stabilized
+                    </ToggleButton>
+                    <ToggleButton id="affordable" value={2}>
+                    Affordable Housing
+                    </ToggleButton>
+                    <ToggleButton id="all" value={3}>
+                    All
+                    </ToggleButton>
+                </ToggleButtonGroup> */}
+                <SearchBox 
+                    accessToken={process.env.REACT_APP_MAPBOX_API_TOKEN}
+                    onRetrieve={handleSearch}
+                    placeholder='Search for a NYC address'
+                    value={null}
+                    options={{
+                        bbox: '-74.25909,40.477399,-73.700272,40.917577',  // NYC bounding box
+                        types: 'address',
+                    }}
+                />
+            </div>
             <Button 
                 style={{ position: 'absolute', top: 10, right: 10, zIndex: 1000}}
                 onClick={handleArrowClick}
                 >
                 <Stack direction='horizontal'>
-                    {isArrowFlipped ? <p style={{marginBottom: "0px", marginRight: "10px"}}>Hide List</p> : <p style={{marginBottom: "0px", marginRight: "10px"}}>Show List</p>}
+                    {isArrowFlipped ? <p style={{marginBottom: "0px", marginRight: "10px"}}>Hide</p> : <p style={{marginBottom: "0px", marginRight: "10px"}}>Details</p>}
                     <ArrowLeft style={{transform: isArrowFlipped ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.6s' }}/>
                 </Stack>
-            </Button> */}
-            <SearchBox 
-                accessToken={process.env.REACT_APP_MAPBOX_API_TOKEN}
-                onRetrieve={handleSearch}
-                placeholder='Search for a NYC address'
-                value={null}
-                options={{
-                    bbox: '-74.25909,40.477399,-73.700272,40.917577',  // NYC bounding box
-                    types: 'address',
-                }}
-            />
+            </Button>
             <div style={{ width: '100%', height: 'calc(100vh - 3.5rem)'}}>
                 <Map2 visiblePins={visiblePins} setVisiblePins={setVisiblePins} handlePinClick={handlePinClick} toggleValue={toggleValue} availableModeToggle={availableModeToggle} setMapInstance={setMapInstance}/>
             </div>
