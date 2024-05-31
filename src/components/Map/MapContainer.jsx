@@ -9,6 +9,7 @@ import { ArrowLeft } from 'react-bootstrap-icons';
 import Stack from 'react-bootstrap/Stack'
 import ToggleButton from 'react-bootstrap/ToggleButton';
 import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup'
+import mapboxgl from 'mapbox-gl';
 
 const MapContainer = ({ toggleWidth, visiblePins, setVisiblePins, handlePinClick, setCurrentPage, availableModeToggle, mapSearchResult }) => {
     const [isArrowFlipped, setIsArrowFlipped] = useState(false);
@@ -21,30 +22,48 @@ const MapContainer = ({ toggleWidth, visiblePins, setVisiblePins, handlePinClick
         return address
     }
 
+    let currentMarker = null
     const handleSearch = async (query) => {
         if (query && mapInstance) {
             const [lon, lat] = query.features[0].geometry.coordinates
+            
             mapInstance.easeTo({
                 center: [lon, lat],
                 zoom: 18
             })
-        }
-        const normalizedAddress = normalizeAddress(query.features[0].properties.address)
-        try {
-            const buildingDetails = await Client.get('/stabilized',{
-                params: {
-                    address: normalizedAddress
+        
+            const normalizedAddress = normalizeAddress(query.features[0].properties.address)
+            try {
+                const buildingDetails = await Client.get('/stabilized',{
+                    params: {
+                        address: normalizedAddress
+                    }
+                })
+
+                let markerLon = lon
+                let markerLat = lat
+
+                if (buildingDetails.data.message === 'No match found') {
+                    console.log("does not exist in database of stabilized buildings")
+                } else {
+                    const { latitude, longitude } = buildingDetails.data
+                    markerLon = longitude
+                    markerLat = latitude
+                    console.log(buildingDetails.data)
                 }
-            })
-            if (buildingDetails.data.message === 'No match found') {
-                console.log("does not exist in database of stabilized buildings")
-            } else {
-                console.log(buildingDetails.data)
+
+                // Remove existing marker
+                if (currentMarker) {
+                    currentMarker.remove()
+                }
+
+                // Add marker to new search
+                currentMarker = new mapboxgl.Marker().setLngLat([markerLon,markerLat]).addTo(mapInstance)
+            } catch (error) {
+                console.log("Error fetching data: ", error)
             }
-        } catch (error) {
-            console.log("Error fetching data: ", error)
+            console.log(normalizeAddress(query.features[0].properties.address))
         }
-        console.log(normalizeAddress(query.features[0].properties.address))
     }
 
     // When navigating to map from landing page's search bar, run handleSearch function
