@@ -14,13 +14,6 @@ const MapPage = ({ mapSearchResult, geojson, fetchGeojson }) => {
         setIsFullWidth(!isFullWidth);
     };
 
-    // State for toggling between Data Mode and Available Listings Mode
-    const [availableModeToggle, setAvailableModeToggle] = useState(false)
-
-
-    // State for which pins are visible in the current map bounds
-    const [visiblePins, setVisiblePins] = useState([])
-
     // States and handleClick for modal with pin details
     const [selectedPin, setSelectedPin] = useState(null)
     const [showPinDetails, setShowPinDetails] = useState(false)
@@ -28,8 +21,6 @@ const MapPage = ({ mapSearchResult, geojson, fetchGeojson }) => {
         setSelectedPin(pin)
         setShowPinDetails(true)
     }
-
-    const [currentPage, setCurrentPage] = useState(1)
 
     return (
     <div>
@@ -39,11 +30,8 @@ const MapPage = ({ mapSearchResult, geojson, fetchGeojson }) => {
         <div style={{ display: 'flex'}}>
             <MapContainer
                 toggleWidth={toggleWidth}
-                setVisiblePins={setVisiblePins}
                 handlePinClick={handlePinClick}
                 style={{ width: isFullWidth ? '100%' : '50%' }} 
-                setCurrentPage={setCurrentPage}
-                availableModeToggle={availableModeToggle}
                 mapSearchResult={mapSearchResult}
                 geojson={geojson}
                 fetchGeojson={fetchGeojson}
@@ -58,11 +46,11 @@ const MapPage = ({ mapSearchResult, geojson, fetchGeojson }) => {
                 currentPage={currentPage}
                 setCurrentPage={setCurrentPage}
             /> */}
-            <BuildingModal
+            {/* <BuildingModal
                 selectedPin={selectedPin}
                 showPinDetails={showPinDetails}
                 setShowPinDetails={setShowPinDetails}
-            />
+            /> */}
         </div>
     </div>
     )

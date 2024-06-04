@@ -1,16 +1,9 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import mapboxgl from 'mapbox-gl';
 import { useNavigate } from 'react-router-dom';
-import Client from '../../services/api';
 
-const Map2 = ({ setVisiblePins, handlePinClick, toggleValue, availableModeToggle, setMapInstance, geojson, fetchGeojson }) => {
+const Map2 = ({ handlePinClick, map, setMap, geojson, fetchGeojson }) => {
     const mapContainer = useRef(null);
-    const [map, setMap] = useState(null);
-    const [dataAffordable, setAffordable] = useState(null)
-    const [dataStabilized, setStabilized] = useState(null)
-    const [visibleAffordable, setVisibleAffordable] = useState([])
-    const [visibleStabilized, setVisibleStabilized] = useState([])
-    const [visibleCombined, setVisibleCombined] = useState([])
 
     const navigate = useNavigate()
 
@@ -87,7 +80,7 @@ const Map2 = ({ setVisiblePins, handlePinClick, toggleValue, availableModeToggle
 
         // When an individual marker is clicked, open building details modal
         newMap.on('click', `${sourceId}-unclustered-point`, (e) => {
-            // handlePinClick(e.features[0].properties)
+            // handlePinClick(e.features[0].properties) // handlePinClick exists in MapPage.js
             navigate(`/details/${e.features[0].properties.bbl}`)
         });
 
@@ -118,60 +111,29 @@ const Map2 = ({ setVisiblePins, handlePinClick, toggleValue, availableModeToggle
                 style: 'mapbox://styles/ajluc/clpekjkig006y01pggisrfnjl',
                 center: [-74.006, 40.7128], // New York City coordinates
                 zoom: 10
-            });
+            })
             
             // Add navigation control (the +/- zoom buttons)
             newMap.addControl(new mapboxgl.NavigationControl(), 'bottom-left')
 
             newMap.on('load', async () => {
-                setMap(newMap);
-                setMapInstance(newMap)
-                // Initial map and card state:
+                setMap(newMap)
                 // Fetch JSON data for Rent Stabilized Buildings and load on map
                 if (geojson) {
                     handleClusters('stabilized', { type: 'FeatureCollection', features: geojson }, newMap, '#f9d74a')
-                    console.log('if geojson')
-                    console.log(geojson)
-                } else {
-                    fetchGeojson().then(() => {
-                        handleClusters('stabilized', { type: 'FeatureCollection', features: geojson }, newMap, '#f9d74a')
-                        console.log('fetch ping')
-                        console.log(geojson)
-                    })
-                }
-                // const stabilized_response = await Client.get('/geojson')
-                // let stabilized_data = stabilized_response.data
-                // setStabilized(stabilized_data.features)
-                // handleClusters('stabilized', stabilized_data, newMap, '#f9d74a')
-                // On load, set state to show all stabilized building cards
-                // setVisibleStabilized(dataStabilized)
-                // setVisiblePins(visibleStabilized)
-            });
-        };
+                } 
+            })
+        }
 
         if (!map) {
-            initializeMap();
-        }
-
-    }, [map, geojson, fetchGeojson]);
-
-
-    useEffect (() => {
-        if(!map) return
-
-        // Function to remove a layer and its source
-        const removeLayerAndSource = (map, layerId) => {
-            if (map.getLayer(layerId)) {
-                // If the layer exists, remove it
-                map.removeLayer(layerId);
-            }
-        
-            if (map.getSource(layerId)) {
-                // If the source exists, remove it
-                map.removeSource(layerId);
+            initializeMap()
+        } else if (geojson) {
+            if (!map.getSource('stabilized')) {
+                handleClusters('stabilized', { type: 'FeatureCollection', features: geojson }, map, '#f9d74a')
             }
         }
-    }, [toggleValue, visibleAffordable, visibleStabilized, availableModeToggle])
+
+    }, [map, geojson, fetchGeojson])
 
     return (
         <div ref={mapContainer} style={{ width: '100%', height: '100%' }} />

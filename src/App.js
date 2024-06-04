@@ -16,8 +16,6 @@ function App() {
   const fetchGeojson = async () => {
     const response = await Client.get('/geojson')
     setGeojson(response.data.features)
-    console.log('fetch response: ')
-    console.log(response.data.features)
   }
 
   useEffect(() => {
