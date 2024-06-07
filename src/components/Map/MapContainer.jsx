@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 // import Map from './Map';
 import Map2 from './Map2';
 import { SearchBox } from '@mapbox/search-js-react';
@@ -11,6 +11,7 @@ import mapboxgl from 'mapbox-gl';
 
 const MapContainer = ({ toggleWidth, setIsFullWidth, isArrowFlipped, setIsArrowFlipped, handlePinClick, mapSearchResult, geojson, fetchGeojson, setCurrentBuilding }) => {
     const [map, setMap] = useState(null)
+    const currentMarker = useRef(null)
 
     // Format addresses to match back end data
     const normalizeAddress = (address) => {
@@ -19,7 +20,6 @@ const MapContainer = ({ toggleWidth, setIsFullWidth, isArrowFlipped, setIsArrowF
         return address
     }
 
-    let currentMarker = null
     const handleSearch = async (query) => {
         if (query && map) {
             const [lon, lat] = query.features[0].geometry.coordinates
@@ -29,6 +29,8 @@ const MapContainer = ({ toggleWidth, setIsFullWidth, isArrowFlipped, setIsArrowF
                 zoom: 18
             })
 
+            console.log('one search')
+            console.log(currentMarker.current)
             setIsFullWidth(false)
             setIsArrowFlipped(true)
         
@@ -54,12 +56,13 @@ const MapContainer = ({ toggleWidth, setIsFullWidth, isArrowFlipped, setIsArrowF
                 }
 
                 // Remove existing marker
-                if (currentMarker) {
-                    currentMarker.remove()
+                if (currentMarker.current) {
+                    console.log('removed')
+                    currentMarker.current.remove()
                 }
 
                 // Add marker to new search
-                currentMarker = new mapboxgl.Marker().setLngLat([markerLon,markerLat]).addTo(map)
+                currentMarker.current = new mapboxgl.Marker().setLngLat([markerLon,markerLat]).addTo(map)
             } catch (error) {
                 console.log("Error fetching data: ", error)
             }
