@@ -29,8 +29,6 @@ const MapContainer = ({ toggleWidth, setIsFullWidth, isArrowFlipped, setIsArrowF
                 zoom: 18
             })
 
-            console.log('one search')
-            console.log(currentMarker.current)
             setIsFullWidth(false)
             setIsArrowFlipped(true)
         
@@ -57,7 +55,6 @@ const MapContainer = ({ toggleWidth, setIsFullWidth, isArrowFlipped, setIsArrowF
 
                 // Remove existing marker
                 if (currentMarker.current) {
-                    console.log('removed')
                     currentMarker.current.remove()
                 }
 
