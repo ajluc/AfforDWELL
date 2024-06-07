@@ -6,17 +6,37 @@ import BuildingDetails from './pages/BuildingDetails';
 import Footer from './components/Footer';
 import MapPage from './pages/MapPage';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import Client from './services/api';
 
 function App() {
   const [mapSearchResult, setMapSearchResult] = useState(null)
+  const [geojson, setGeojson] = useState(null)
+  const [currentBuilding, setCurrentBuilding] = useState(null)
+
+  const fetchGeojson = async () => {
+    const response = await Client.get('/geojson')
+    setGeojson(response.data.features)
+  }
+
+  useEffect(() => {
+    if (!geojson) {
+      fetchGeojson()
+    }
+  }, [])
 
   return (
     <div className="App">
       <NavBar />
       <Routes>
         <Route path='/' element={<Landing setMapSearchResult={setMapSearchResult}/>}/>
-        <Route path='/map' element={<MapPage mapSearchResult={mapSearchResult}/>}/>
+        <Route path='/map' element={<MapPage 
+          mapSearchResult={mapSearchResult}
+          geojson={geojson}
+          fetchGeojson={fetchGeojson}
+          currentBuilding={currentBuilding}
+          setCurrentBuilding={setCurrentBuilding}
+        />}/>
         <Route path='/about' element={<About />}/>
         <Route path='/details/:bbl' element={<BuildingDetails />}/>
       </Routes>

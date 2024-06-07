@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 // import Map from './Map';
 import Map2 from './Map2';
 import { SearchBox } from '@mapbox/search-js-react';
@@ -7,12 +7,11 @@ import Client from '../../services/api';
 import Button from 'react-bootstrap/Button';
 import { ArrowLeft } from 'react-bootstrap-icons';
 import Stack from 'react-bootstrap/Stack'
-import ToggleButton from 'react-bootstrap/ToggleButton';
-import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup'
+import mapboxgl from 'mapbox-gl';
 
-const MapContainer = ({ toggleWidth, visiblePins, setVisiblePins, handlePinClick, setCurrentPage, availableModeToggle, mapSearchResult }) => {
-    const [isArrowFlipped, setIsArrowFlipped] = useState(false);
-    const [mapInstance, setMapInstance] = useState(null)
+const MapContainer = ({ toggleWidth, setIsFullWidth, isArrowFlipped, setIsArrowFlipped, handlePinClick, mapSearchResult, geojson, fetchGeojson, setCurrentBuilding }) => {
+    const [map, setMap] = useState(null)
+    const currentMarker = useRef(null)
 
     // Format addresses to match back end data
     const normalizeAddress = (address) => {
@@ -22,69 +21,66 @@ const MapContainer = ({ toggleWidth, visiblePins, setVisiblePins, handlePinClick
     }
 
     const handleSearch = async (query) => {
-        if (query && mapInstance) {
+        if (query && map) {
             const [lon, lat] = query.features[0].geometry.coordinates
-            mapInstance.easeTo({
+            
+            map.easeTo({
                 center: [lon, lat],
                 zoom: 18
             })
-        }
-        const normalizedAddress = normalizeAddress(query.features[0].properties.address)
-        try {
-            const buildingDetails = await Client.get('/stabilized',{
-                params: {
-                    address: normalizedAddress
+
+            setIsFullWidth(false)
+            setIsArrowFlipped(true)
+        
+            const normalizedAddress = normalizeAddress(query.features[0].properties.address)
+            try {
+                const buildingDetails = await Client.get('/stabilized',{
+                    params: {
+                        address: normalizedAddress
+                    }
+                })
+
+                let markerLon = lon
+                let markerLat = lat
+
+                if (buildingDetails.data.message === 'No match found') {
+                    console.log("does not exist in database of stabilized buildings")
+                    setCurrentBuilding(null)
+                } else {
+                    const { latitude, longitude } = buildingDetails.data
+                    markerLon = longitude
+                    markerLat = latitude
+                    setCurrentBuilding(buildingDetails.data)
                 }
-            })
-            if (buildingDetails.data.message === 'No match found') {
-                console.log("does not exist in database of stabilized buildings")
-            } else {
-                console.log(buildingDetails.data)
+
+                // Remove existing marker
+                if (currentMarker.current) {
+                    currentMarker.current.remove()
+                }
+
+                // Add marker to new search
+                currentMarker.current = new mapboxgl.Marker().setLngLat([markerLon,markerLat]).addTo(map)
+            } catch (error) {
+                console.log("Error fetching data: ", error)
             }
-        } catch (error) {
-            console.log("Error fetching data: ", error)
         }
-        console.log(normalizeAddress(query.features[0].properties.address))
     }
 
     // When navigating to map from landing page's search bar, run handleSearch function
     useEffect(() => {
-        if (mapSearchResult && mapInstance) {
+        if (mapSearchResult && map) {
             handleSearch(mapSearchResult)
         }
-    }, [mapSearchResult, mapInstance])
+    }, [mapSearchResult, map])
 
     const handleArrowClick = () => {
         setIsArrowFlipped(!isArrowFlipped);
         toggleWidth();
     };
 
-    const [toggleValue, setToggleValue] = useState(3)
-    const handleToggleClick = (val) => {
-        setToggleValue(val)
-        setCurrentPage(1)
-    }
-
     return (
         <div style={{ width: '100%', position: 'relative' }}>
             <div style={{ position: 'absolute', top: 10, left: 10, zIndex: 1000, minWidth: '40vw'}}>
-                {/* <ToggleButtonGroup
-                    type="radio" 
-                    name="options" 
-                    defaultValue={3} 
-                    onChange={handleToggleClick} 
-                    // style={{ position: 'absolute', top: 10, left: 10, zIndex: 1000}}
-                >
-                    <ToggleButton id="stabilized" value={1}>
-                    Rent Stabilized
-                    </ToggleButton>
-                    <ToggleButton id="affordable" value={2}>
-                    Affordable Housing
-                    </ToggleButton>
-                    <ToggleButton id="all" value={3}>
-                    All
-                    </ToggleButton>
-                </ToggleButtonGroup> */}
                 <SearchBox 
                     accessToken={process.env.REACT_APP_MAPBOX_API_TOKEN}
                     onRetrieve={handleSearch}
@@ -106,7 +102,7 @@ const MapContainer = ({ toggleWidth, visiblePins, setVisiblePins, handlePinClick
                 </Stack>
             </Button>
             <div style={{ width: '100%', height: 'calc(100vh - 3.5rem)'}}>
-                <Map2 visiblePins={visiblePins} setVisiblePins={setVisiblePins} handlePinClick={handlePinClick} toggleValue={toggleValue} availableModeToggle={availableModeToggle} setMapInstance={setMapInstance}/>
+                <Map2 handlePinClick={handlePinClick} map={map} setMap={setMap} geojson={geojson} fetchGeojson={fetchGeojson}/>
             </div>
 
         </div>

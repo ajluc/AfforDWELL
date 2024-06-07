@@ -2,33 +2,23 @@
 import { useState } from 'react';
 import CardsContainer from '../components/CardsContainer';
 import MapContainer from "../components/Map/MapContainer"
-import Container from 'react-bootstrap/Container';
-import BuildingModal from '../components/BuildingModal';
-import MapFilters from '../components/MapFilters';
+import DrawerContainer from '../components/BuildingDetails/DrawerContainer';
 
-const MapPage = ({ mapSearchResult }) => {
+const MapPage = ({ mapSearchResult, geojson, fetchGeojson, currentBuilding, setCurrentBuilding }) => {
     // State and toggle for opening and closing the cards container panel
     const [isFullWidth, setIsFullWidth] = useState(true);
+    const [isArrowFlipped, setIsArrowFlipped] = useState(false)
+
     const toggleWidth = () => {
         setIsFullWidth(!isFullWidth);
     };
 
-    // State for toggling between Data Mode and Available Listings Mode
-    const [availableModeToggle, setAvailableModeToggle] = useState(false)
-
-
-    // State for which pins are visible in the current map bounds
-    const [visiblePins, setVisiblePins] = useState([])
-
-    // States and handleClick for modal with pin details
-    const [selectedPin, setSelectedPin] = useState(null)
-    const [showPinDetails, setShowPinDetails] = useState(false)
+    // States and handleClick for drawer with pin details
     const handlePinClick = (pin) => {
-        setSelectedPin(pin)
-        setShowPinDetails(true)
+        setIsFullWidth(false)
+        setIsArrowFlipped(true)
+        setCurrentBuilding(pin)
     }
-
-    const [currentPage, setCurrentPage] = useState(1)
 
     return (
     <div>
@@ -38,25 +28,32 @@ const MapPage = ({ mapSearchResult }) => {
         <div style={{ display: 'flex'}}>
             <MapContainer
                 toggleWidth={toggleWidth}
-                setVisiblePins={setVisiblePins}
+                setIsFullWidth={setIsFullWidth}
+                isArrowFlipped={isArrowFlipped}
+                setIsArrowFlipped={setIsArrowFlipped}
                 handlePinClick={handlePinClick}
                 style={{ width: isFullWidth ? '100%' : '50%' }} 
-                setCurrentPage={setCurrentPage}
-                availableModeToggle={availableModeToggle}
                 mapSearchResult={mapSearchResult}
+                geojson={geojson}
+                fetchGeojson={fetchGeojson}
+                setCurrentBuilding={setCurrentBuilding}
             />
-            <CardsContainer
+            <DrawerContainer 
+                isVisible={!isFullWidth}
+                currentBuilding={currentBuilding}
+            />
+            {/* <CardsContainer
                 isVisible={!isFullWidth}
                 visiblePins={visiblePins}
                 handlePinClick={handlePinClick}
                 currentPage={currentPage}
                 setCurrentPage={setCurrentPage}
-            />
-            <BuildingModal
+            /> */}
+            {/* <BuildingModal
                 selectedPin={selectedPin}
                 showPinDetails={showPinDetails}
                 setShowPinDetails={setShowPinDetails}
-            />
+            /> */}
         </div>
     </div>
     )
