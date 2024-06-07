@@ -80,8 +80,8 @@ const Map2 = ({ handlePinClick, map, setMap, geojson, fetchGeojson }) => {
 
         // When an individual marker is clicked, open building details modal
         newMap.on('click', `${sourceId}-unclustered-point`, (e) => {
-            // handlePinClick(e.features[0].properties) // handlePinClick exists in MapPage.js
-            navigate(`/details/${e.features[0].properties.bbl}`)
+            handlePinClick(e.features[0].properties) // handlePinClick exists in MapPage.js
+            // navigate(`/details/${e.features[0].properties.bbl}`)
         });
 
         // Change the cursor to a pointer when hovering over clusters and individual markers

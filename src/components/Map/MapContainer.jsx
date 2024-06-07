@@ -9,8 +9,7 @@ import { ArrowLeft } from 'react-bootstrap-icons';
 import Stack from 'react-bootstrap/Stack'
 import mapboxgl from 'mapbox-gl';
 
-const MapContainer = ({ toggleWidth, handlePinClick, mapSearchResult, geojson, fetchGeojson }) => {
-    const [isArrowFlipped, setIsArrowFlipped] = useState(false);
+const MapContainer = ({ toggleWidth, setIsFullWidth, isArrowFlipped, setIsArrowFlipped, handlePinClick, mapSearchResult, geojson, fetchGeojson, setCurrentBuilding }) => {
     const [map, setMap] = useState(null)
 
     // Format addresses to match back end data
@@ -29,6 +28,9 @@ const MapContainer = ({ toggleWidth, handlePinClick, mapSearchResult, geojson, f
                 center: [lon, lat],
                 zoom: 18
             })
+
+            setIsFullWidth(false)
+            setIsArrowFlipped(true)
         
             const normalizedAddress = normalizeAddress(query.features[0].properties.address)
             try {
@@ -43,10 +45,12 @@ const MapContainer = ({ toggleWidth, handlePinClick, mapSearchResult, geojson, f
 
                 if (buildingDetails.data.message === 'No match found') {
                     console.log("does not exist in database of stabilized buildings")
+                    setCurrentBuilding(null)
                 } else {
                     const { latitude, longitude } = buildingDetails.data
                     markerLon = longitude
                     markerLat = latitude
+                    setCurrentBuilding(buildingDetails.data)
                 }
 
                 // Remove existing marker

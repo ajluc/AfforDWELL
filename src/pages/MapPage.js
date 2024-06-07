@@ -2,24 +2,22 @@
 import { useState } from 'react';
 import CardsContainer from '../components/CardsContainer';
 import MapContainer from "../components/Map/MapContainer"
-import Container from 'react-bootstrap/Container';
-import BuildingModal from '../components/BuildingModal';
-import MapFilters from '../components/MapFilters';
 import DrawerContainer from '../components/BuildingDetails/DrawerContainer';
 
-const MapPage = ({ mapSearchResult, geojson, fetchGeojson }) => {
+const MapPage = ({ mapSearchResult, geojson, fetchGeojson, currentBuilding, setCurrentBuilding }) => {
     // State and toggle for opening and closing the cards container panel
     const [isFullWidth, setIsFullWidth] = useState(true);
+    const [isArrowFlipped, setIsArrowFlipped] = useState(false)
+
     const toggleWidth = () => {
         setIsFullWidth(!isFullWidth);
     };
 
-    // States and handleClick for modal with pin details
-    const [selectedPin, setSelectedPin] = useState(null)
-    const [showPinDetails, setShowPinDetails] = useState(false)
+    // States and handleClick for drawer with pin details
     const handlePinClick = (pin) => {
-        setSelectedPin(pin)
-        setShowPinDetails(true)
+        setIsFullWidth(false)
+        setIsArrowFlipped(true)
+        setCurrentBuilding(pin)
     }
 
     return (
@@ -30,14 +28,19 @@ const MapPage = ({ mapSearchResult, geojson, fetchGeojson }) => {
         <div style={{ display: 'flex'}}>
             <MapContainer
                 toggleWidth={toggleWidth}
+                setIsFullWidth={setIsFullWidth}
+                isArrowFlipped={isArrowFlipped}
+                setIsArrowFlipped={setIsArrowFlipped}
                 handlePinClick={handlePinClick}
                 style={{ width: isFullWidth ? '100%' : '50%' }} 
                 mapSearchResult={mapSearchResult}
                 geojson={geojson}
                 fetchGeojson={fetchGeojson}
+                setCurrentBuilding={setCurrentBuilding}
             />
             <DrawerContainer 
                 isVisible={!isFullWidth}
+                currentBuilding={currentBuilding}
             />
             {/* <CardsContainer
                 isVisible={!isFullWidth}
