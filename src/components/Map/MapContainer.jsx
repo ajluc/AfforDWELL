@@ -22,6 +22,9 @@ const MapContainer = ({ toggleWidth, setIsFullWidth, isArrowFlipped, setIsArrowF
 
     const handleSearch = async (query) => {
         if (query && map) {
+            setIsFullWidth(false)
+            setIsArrowFlipped(true)
+
             const [lon, lat] = query.features[0].geometry.coordinates
             
             map.easeTo({
@@ -29,8 +32,6 @@ const MapContainer = ({ toggleWidth, setIsFullWidth, isArrowFlipped, setIsArrowF
                 zoom: 18
             })
 
-            setIsFullWidth(false)
-            setIsArrowFlipped(true)
         
             const normalizedAddress = normalizeAddress(query.features[0].properties.address)
             try {
