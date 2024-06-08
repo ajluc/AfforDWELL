@@ -11,7 +11,7 @@ import Client from '../services/api'
 import Info from '../components/BuildingDetails/Info'
 
 const BuildingDetails = () => {
-    const { bbl } = useParams()
+    const { bbl } = useParams() // When updating: swap to if no building details, useParam of some type?
     const [buildingDetails, setBuildingDetails] = useState(null)
     const [loading, setLoading] = useState(false)
     const [percentStabilized, setPercent] = useState(null)
@@ -62,7 +62,6 @@ const BuildingDetails = () => {
 
     useEffect(() => {
         const fetchBuildingDetails = async () => {
-            setLoading(true)
             const response = await Client.get(`/rentstabs/${bbl}`)
             const data = await response.data
             setBuildingDetails(data)
