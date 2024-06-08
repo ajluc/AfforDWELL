@@ -39,6 +39,7 @@ const MapPage = ({ mapSearchResult, geojson, fetchGeojson, currentBuilding, setC
                 setCurrentBuilding={setCurrentBuilding}
             />
             <DrawerContainer 
+                key={currentBuilding?.ucbbl}
                 isVisible={!isFullWidth}
                 currentBuilding={currentBuilding}
             />

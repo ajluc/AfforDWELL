@@ -1,85 +1,23 @@
-import { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
+
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import { useParams } from 'react-router-dom'
+import Card from 'react-bootstrap/Card'
+
+import Info from '../components/BuildingDetails/Info'
+import StreetView from '../components/BuildingDetails/StreetView'
 import PercentDial from '../components/BuildingDetails/PercentDial'
 import RentOverTimeChart from '../components/BuildingDetails/RentOverTimeChart'
-import StreetView from '../components/BuildingDetails/StreetView'
-import Card from 'react-bootstrap/Card'
-import Client from '../services/api'
-import Info from '../components/BuildingDetails/Info'
+
+import useBuildingDetails from '../hooks/useBuildingDetails'
 
 const BuildingDetails = () => {
     const { bbl } = useParams()
-    const [buildingDetails, setBuildingDetails] = useState(null)
-    const [loading, setLoading] = useState(false)
-    const [percentStabilized, setPercent] = useState(null)
-    const [mostRecentUc, setMostRecentUc] = useState(null)
-    const [formattedAddress, setFormattedAddress] = useState(null)
-    const [borough, setBorough] = useState(null)
-
-    const handlePercentage = (uc2018, uc2019, uc2020, uc2021, unitsres) => {
-        const mostRecentData = uc2021 || uc2020 || uc2019 || uc2018 || null
-        const percentage = (mostRecentData / parseInt(unitsres, 10)) * 100
-        setPercent(percentage.toFixed(0))
-        setMostRecentUc(mostRecentData)
-    }
-    
-    const formatAddress = (address) => {
-        const words = address.split(' ')
-        const formattedWords = words.map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-        const formattedAddress = formattedWords.join(' ')
-        setFormattedAddress(formattedAddress)
-    }
-
-    const getBorough = (bbl) => {
-        const boroughCode = parseInt(bbl.toString().charAt(0), 10)
-
-        let borough
-        switch (boroughCode) {
-            case 1:
-                borough = 'Manhattan'
-                break
-            case 2:
-                borough = 'Bronx'
-                break
-            case 3:
-                borough = 'Brooklyn'
-                break
-            case 4:
-                borough = 'Queens'
-                break
-            case 5:
-                borough = 'Staten Island'
-                break
-            default:
-                borough = 'Unknown'
-        }
-
-        setBorough(borough)
-    }
-
-    useEffect(() => {
-        const fetchBuildingDetails = async () => {
-            setLoading(true)
-            const response = await Client.get(`/rentstabs/${bbl}`)
-            const data = await response.data
-            setBuildingDetails(data)
-            formatAddress(data.address)
-            getBorough(data.ucbbl)
-            handlePercentage(data.uc2018, data.uc2019, data.uc2020, data.uc2021, data.unitsres)
-        }
-
-        if (bbl) {
-            fetchBuildingDetails()
-        }
-    }, [bbl])
-
+    const { buildingDetails, percentStabilized, mostRecentUc, formattedAddress, borough } = useBuildingDetails(bbl)
 
     return (
         <div>
-
             <Container fluid className='container-fixed-width'>
                 <Row className='content-row'>
                     <Col xs={12} md={5} className="scrollable-column order-md-1 order-2">
