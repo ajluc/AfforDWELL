@@ -5,8 +5,8 @@ const StreetView = ({ latitude, longitude, address }) => {
 
     useEffect(() => {
         const fetchStreetViewImage = () => {
-            const apiKey = process.env.REACT_APP_GOOGLE_API_KEY
             try {
+                const apiKey = process.env.REACT_APP_GOOGLE_API_KEY
                 const streetViewURL = `https://maps.googleapis.com/maps/api/streetview?size=600x300&location=${latitude},${longitude}&key=${apiKey}`
                 setImageUrl(streetViewURL)
             } catch (error) {
